@@ -22,5 +22,6 @@
 /gen_latest_log
 /latest_log
 /go.sum
+/go.mod
 /b2c-staff
 /docs
