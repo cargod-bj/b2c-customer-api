@@ -3,20 +3,20 @@ syntax = "proto3";
 package customer;
 import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
-
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
 option go_package="github.com/cargod-bj/b2c-customer-api/customer";
 /**
   * 客户
  */
 service Customer {
   //新增客户，返回data.nil
-  rpc Add(CustomerDTO) returns (Response) {}
+  rpc Add(CustomerDTO) returns (common.Response) {}
   //删除客户，这里是假删除，设置status为1表示已删除，返回data.nil
-  rpc Delete(DeleteId) returns (Response) {}
+  rpc Delete(DeleteId) returns (common.Response) {}
   //更新客户，返回data.nil
-  rpc Update(CustomerDTO) returns (Response) {}
+  rpc Update(CustomerDTO) returns (common.Response) {}
   //获取客户列表，返回客户列表
-  rpc GetList(CustomerCondition) returns (Response) {}
+  rpc GetList(common.Page) returns (Response) {}
 
 }
 
@@ -40,17 +40,6 @@ message CustomerList {
   uint32 pageSize = 2;
   repeated CustomerDTO customers = 3;
   uint32 count = 4;
-}
-message CustomerCondition {
-  uint32 page = 1;
-  uint32 limit = 2;
-  string name = 3;
-}
-
-message Response {
-  string msg = 1;
-  google.protobuf.Any data = 3;
-  string code = 2;
 }
 
 message AddCustomerData{
