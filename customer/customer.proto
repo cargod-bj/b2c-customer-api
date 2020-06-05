@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package go.micro.service.customer;
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package="customer";
+/**
+  * 客户
+ */
+service Customer {
+  //新增客户，返回data.nil
+  rpc Add(CustomerDTO) returns (Response) {}
+  //删除客户，这里是假删除，设置status为1表示已删除，返回data.nil
+  rpc Delete(DeleteId) returns (Response) {}
+  //更新客户，返回data.nil
+  rpc Update(CustomerDTO) returns (Response) {}
+  //获取客户列表，返回客户列表
+  rpc GetList(CustomerCondition) returns (Response) {}
+
+}
+
+message CustomerDTO {
+  uint64 id = 1;
+  string name = 2;//用户姓名
+  string loginName = 3;//用户名
+  string email = 4;
+  string icon = 5;
+  string mobile = 6;
+  string password = 7;
+  uint32 gender = 8;//性别1是女，2是男
+  google.protobuf.Timestamp birthday = 9;
+  google.protobuf.Timestamp createTime = 10;
+  google.protobuf.Timestamp updateTime = 11;
+  string source = 12;
+}
+
+message CustomerList {
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  repeated CustomerDTO customers = 3;
+  uint32 count = 4;
+}
+message CustomerCondition {
+  uint32 page = 1;
+  uint32 limit = 2;
+  string name = 3;
+}
+
+message Response {
+  string msg = 1;
+  google.protobuf.Any data = 3;
+  string code = 2;
+}
+
+message AddCustomerData{
+  uint64 id = 1;
+}
+message DeleteId{
+  uint64 id = 1;
+}
+
