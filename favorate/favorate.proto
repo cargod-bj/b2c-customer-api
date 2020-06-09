@@ -23,8 +23,8 @@ message FavorateDTO {
   uint64 id = 1;
   uint64 userId = 2;//用户姓名
   uint64 carId = 3;//用户名
-  google.protobuf.Timestamp createTime = 4;
-  google.protobuf.Timestamp updateTime = 5;
+  uint64 createTime = 4;
+  uint64 updateTime = 5;
 }
 
 message AddFavorateData{

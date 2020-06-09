@@ -28,9 +28,9 @@ message CustomerDTO {
   string mobile = 6;
   string password = 7;
   uint32 gender = 8;//性别1是女，2是男
-  google.protobuf.Timestamp birthday = 9;
-  google.protobuf.Timestamp createTime = 10;
-  google.protobuf.Timestamp updateTime = 11;
+  uint64 birthday = 9;
+  uint64 createTime = 10;
+  uint64 updateTime = 11;
   string source = 12;
 }
 
