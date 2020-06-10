@@ -13,6 +13,8 @@ service Customer {
   rpc Delete(DeleteId) returns (common.Response) {}
   //更新客户，返回data.nil
   rpc Update(CustomerDTO) returns (common.Response) {}
+  //获取客户根据客户登录名
+  rpc GetCustomer(CustomerDTO) returns (common.Response) {}
   //获取客户列表，返回客户列表
   rpc GetList(common.Page) returns (common.Response) {}
 
