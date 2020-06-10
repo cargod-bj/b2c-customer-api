@@ -49,6 +49,8 @@ type CustomerService interface {
 	Delete(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
 	//更新客户，返回data.nil
 	Update(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
+	//获取客户根据客户登录名
+	GetCustomer(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
 	//获取客户列表，返回客户列表
 	GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
 }
@@ -95,6 +97,16 @@ func (c *customerService) Update(ctx context.Context, in *CustomerDTO, opts ...c
 	return out, nil
 }
 
+func (c *customerService) GetCustomer(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.GetCustomer", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *customerService) GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Customer.GetList", in)
 	out := new(common.Response)
@@ -114,6 +126,8 @@ type CustomerHandler interface {
 	Delete(context.Context, *DeleteId, *common.Response) error
 	//更新客户，返回data.nil
 	Update(context.Context, *CustomerDTO, *common.Response) error
+	//获取客户根据客户登录名
+	GetCustomer(context.Context, *CustomerDTO, *common.Response) error
 	//获取客户列表，返回客户列表
 	GetList(context.Context, *common.Page, *common.Response) error
 }
@@ -123,6 +137,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		Add(ctx context.Context, in *CustomerDTO, out *common.Response) error
 		Delete(ctx context.Context, in *DeleteId, out *common.Response) error
 		Update(ctx context.Context, in *CustomerDTO, out *common.Response) error
+		GetCustomer(ctx context.Context, in *CustomerDTO, out *common.Response) error
 		GetList(ctx context.Context, in *common.Page, out *common.Response) error
 	}
 	type Customer struct {
@@ -146,6 +161,10 @@ func (h *customerHandler) Delete(ctx context.Context, in *DeleteId, out *common.
 
 func (h *customerHandler) Update(ctx context.Context, in *CustomerDTO, out *common.Response) error {
 	return h.CustomerHandler.Update(ctx, in, out)
+}
+
+func (h *customerHandler) GetCustomer(ctx context.Context, in *CustomerDTO, out *common.Response) error {
+	return h.CustomerHandler.GetCustomer(ctx, in, out)
 }
 
 func (h *customerHandler) GetList(ctx context.Context, in *common.Page, out *common.Response) error {
