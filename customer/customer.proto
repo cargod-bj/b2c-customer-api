@@ -33,6 +33,7 @@ message CustomerDTO {
   uint64 createTime = 10;
   uint64 updateTime = 11;
   string source = 12;
+  string uuid = 13;
 }
 
 message CustomerList {

@@ -43,6 +43,7 @@ type CustomerDTO struct {
 	CreateTime uint64 `protobuf:"varint,10,opt,name=createTime,proto3" json:"createTime,omitempty"`
 	UpdateTime uint64 `protobuf:"varint,11,opt,name=updateTime,proto3" json:"updateTime,omitempty"`
 	Source     string `protobuf:"bytes,12,opt,name=source,proto3" json:"source,omitempty"`
+	Uuid       string `protobuf:"bytes,12,opt,name=uuid,proto3" json:"uuid,omitempty"`
 }
 
 func (x *CustomerDTO) Reset() {
