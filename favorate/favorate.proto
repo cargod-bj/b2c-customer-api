@@ -4,20 +4,21 @@ package favorate;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
 option go_package = "github.com/cargod-bj/b2c-customer-api/favorate";
 /**
-  * 客户收藏
+  * 客户
  */
 service Favorate {
-  //新增收藏，返回data.nil
+  //新增客户，返回data.nil
   rpc Add(FavorateDTO) returns (common.Response) {}
-  //删除收藏，这里是假删除，设置status为1表示已删除，返回data.nil
+  //删除客户，这里是假删除，设置status为1表示已删除，返回data.nil
   rpc Delete(DeleteId) returns (common.Response) {}
-  //更新收藏，返回data.nil
+  //更新客户，返回data.nil
   rpc Update(FavorateDTO) returns (common.Response) {}
-  //获取收藏列表，返回客户列表
+  //获取客户列表，返回客户列表
   rpc GetList(common.Page) returns (common.Response) {}
-  //获取收藏列表，返回客户收藏列表
+  //获取收藏的车辆iDs
   rpc GetByUser(User) returns (common.Response) {}
-
+  //删除收藏
+  rpc DeleteFavorate(DelFavorate) returns (common.Response) {}
 }
 
 message FavorateDTO {
@@ -27,8 +28,12 @@ message FavorateDTO {
   uint64 createTime = 4;
   uint64 updateTime = 5;
 }
+message CarIds {
+  repeated uint64 carId = 1;//车辆ID
+}
 message User{
-  uint64 userId = 1;//用户姓名
+  common.Page page = 1;
+  uint64 userId = 2;//用户姓名
 }
 message AddFavorateData{
   uint64 id = 1;
@@ -37,3 +42,7 @@ message DeleteId{
   uint64 id = 1;
 }
 
+message DelFavorate{
+  uint64 carId = 1;//车辆ID
+  uint64 userId = 2;//用户ID
+}
