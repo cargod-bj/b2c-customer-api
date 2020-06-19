@@ -29,7 +29,7 @@ message CustomerDTO {
   string mobile = 6;
   string password = 7;
   uint32 gender = 8;//性别1是女，2是男
-  uint64 birthday = 9;
+  string birthday = 9;
   uint64 createTime = 10;
   uint64 updateTime = 11;
   string source = 12;
