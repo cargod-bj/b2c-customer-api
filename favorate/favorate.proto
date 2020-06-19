@@ -17,7 +17,8 @@ service Favorate {
   rpc GetList(common.Page) returns (common.Response) {}
   //获取收藏的车辆iDs
   rpc GetByUser(User) returns (common.Response) {}
-
+  //删除收藏
+  rpc DeleteFavorate(DelFavorate) returns (common.Response) {}
 }
 
 message FavorateDTO {
@@ -41,3 +42,7 @@ message DeleteId{
   uint64 id = 1;
 }
 
+message DelFavorate{
+  uint64 carId = 1;//车辆ID
+  uint64 userId = 2;//用户ID
+}
