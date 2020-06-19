@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package login;
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+option go_package = "github.com/cargod-bj/b2c-customer-api/login";
+/**
+  * 登录
+ */
+service Login {
+  //通过手机号发送短信，返回data.nil
+  rpc SendSMS(LoginDTO) returns (common.Response) {}
+  //用户登录校验，返回token
+  rpc Login(LoginDTO) returns (common.Response) {}
+
+}
+
+message LoginDTO {
+  string UserName = 1;//手机号
+  string Captcha = 2;//验证码
+
+}
+
