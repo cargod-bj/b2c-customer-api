@@ -31,7 +31,8 @@ message CarIds {
   repeated uint64 carId = 1;//车辆ID
 }
 message User{
-  uint64 userId = 1;//用户姓名
+  common.Page page = 1;
+  uint64 userId = 2;//用户姓名
 }
 message AddFavorateData{
   uint64 id = 1;
