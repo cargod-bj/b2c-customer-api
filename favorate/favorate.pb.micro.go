@@ -51,8 +51,8 @@ type FavorateService interface {
 	Update(ctx context.Context, in *FavorateDTO, opts ...client.CallOption) (*common.Response, error)
 	//获取客户列表，返回客户列表
 	GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
-	//获取客户列表，返回客户列表
-	GetByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error)
+	//获取收藏的车辆iDs
+	GetByUser(ctx context.Context, in *User, opts ...client.CallOption) (*CarIds, error)
 }
 
 type favorateService struct {
@@ -107,9 +107,9 @@ func (c *favorateService) GetList(ctx context.Context, in *common.Page, opts ...
 	return out, nil
 }
 
-func (c *favorateService) GetByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error) {
+func (c *favorateService) GetByUser(ctx context.Context, in *User, opts ...client.CallOption) (*CarIds, error) {
 	req := c.c.NewRequest(c.name, "Favorate.GetByUser", in)
-	out := new(common.Response)
+	out := new(CarIds)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -128,8 +128,8 @@ type FavorateHandler interface {
 	Update(context.Context, *FavorateDTO, *common.Response) error
 	//获取客户列表，返回客户列表
 	GetList(context.Context, *common.Page, *common.Response) error
-	//获取客户列表，返回客户列表
-	GetByUser(context.Context, *User, *common.Response) error
+	//获取收藏的车辆iDs
+	GetByUser(context.Context, *User, *CarIds) error
 }
 
 func RegisterFavorateHandler(s server.Server, hdlr FavorateHandler, opts ...server.HandlerOption) error {
@@ -138,7 +138,7 @@ func RegisterFavorateHandler(s server.Server, hdlr FavorateHandler, opts ...serv
 		Delete(ctx context.Context, in *DeleteId, out *common.Response) error
 		Update(ctx context.Context, in *FavorateDTO, out *common.Response) error
 		GetList(ctx context.Context, in *common.Page, out *common.Response) error
-		GetByUser(ctx context.Context, in *User, out *common.Response) error
+		GetByUser(ctx context.Context, in *User, out *CarIds) error
 	}
 	type Favorate struct {
 		favorate
@@ -167,6 +167,6 @@ func (h *favorateHandler) GetList(ctx context.Context, in *common.Page, out *com
 	return h.FavorateHandler.GetList(ctx, in, out)
 }
 
-func (h *favorateHandler) GetByUser(ctx context.Context, in *User, out *common.Response) error {
+func (h *favorateHandler) GetByUser(ctx context.Context, in *User, out *CarIds) error {
 	return h.FavorateHandler.GetByUser(ctx, in, out)
 }

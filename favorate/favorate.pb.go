@@ -105,6 +105,53 @@ func (x *FavorateDTO) GetUpdateTime() uint64 {
 	return 0
 }
 
+type CarIds struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CarId []uint64 `protobuf:"varint,1,rep,packed,name=carId,proto3" json:"carId,omitempty"` //车辆ID
+}
+
+func (x *CarIds) Reset() {
+	*x = CarIds{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_favorate_favorate_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CarIds) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CarIds) ProtoMessage() {}
+
+func (x *CarIds) ProtoReflect() protoreflect.Message {
+	mi := &file_favorate_favorate_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CarIds.ProtoReflect.Descriptor instead.
+func (*CarIds) Descriptor() ([]byte, []int) {
+	return file_favorate_favorate_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CarIds) GetCarId() []uint64 {
+	if x != nil {
+		return x.CarId
+	}
+	return nil
+}
+
 type User struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -116,7 +163,7 @@ type User struct {
 func (x *User) Reset() {
 	*x = User{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_favorate_favorate_proto_msgTypes[1]
+		mi := &file_favorate_favorate_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -129,7 +176,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_favorate_favorate_proto_msgTypes[1]
+	mi := &file_favorate_favorate_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -142,7 +189,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_favorate_favorate_proto_rawDescGZIP(), []int{1}
+	return file_favorate_favorate_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *User) GetUserId() uint64 {
@@ -163,7 +210,7 @@ type AddFavorateData struct {
 func (x *AddFavorateData) Reset() {
 	*x = AddFavorateData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_favorate_favorate_proto_msgTypes[2]
+		mi := &file_favorate_favorate_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -176,7 +223,7 @@ func (x *AddFavorateData) String() string {
 func (*AddFavorateData) ProtoMessage() {}
 
 func (x *AddFavorateData) ProtoReflect() protoreflect.Message {
-	mi := &file_favorate_favorate_proto_msgTypes[2]
+	mi := &file_favorate_favorate_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -189,7 +236,7 @@ func (x *AddFavorateData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddFavorateData.ProtoReflect.Descriptor instead.
 func (*AddFavorateData) Descriptor() ([]byte, []int) {
-	return file_favorate_favorate_proto_rawDescGZIP(), []int{2}
+	return file_favorate_favorate_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AddFavorateData) GetId() uint64 {
@@ -210,7 +257,7 @@ type DeleteId struct {
 func (x *DeleteId) Reset() {
 	*x = DeleteId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_favorate_favorate_proto_msgTypes[3]
+		mi := &file_favorate_favorate_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -223,7 +270,7 @@ func (x *DeleteId) String() string {
 func (*DeleteId) ProtoMessage() {}
 
 func (x *DeleteId) ProtoReflect() protoreflect.Message {
-	mi := &file_favorate_favorate_proto_msgTypes[3]
+	mi := &file_favorate_favorate_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -236,7 +283,7 @@ func (x *DeleteId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteId.ProtoReflect.Descriptor instead.
 func (*DeleteId) Descriptor() ([]byte, []int) {
-	return file_favorate_favorate_proto_rawDescGZIP(), []int{3}
+	return file_favorate_favorate_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DeleteId) GetId() uint64 {
@@ -263,7 +310,9 @@ var file_favorate_favorate_proto_rawDesc = []byte{
 	0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04,
 	0x52, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x1e, 0x0a, 0x0a,
 	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x1e, 0x0a, 0x04,
+	0x52, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x1e, 0x0a, 0x06,
+	0x43, 0x61, 0x72, 0x49, 0x64, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x61, 0x72, 0x49, 0x64, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x04, 0x52, 0x05, 0x63, 0x61, 0x72, 0x49, 0x64, 0x22, 0x1e, 0x0a, 0x04,
 	0x55, 0x73, 0x65, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x22, 0x21, 0x0a, 0x0f,
 	0x41, 0x64, 0x64, 0x46, 0x61, 0x76, 0x6f, 0x72, 0x61, 0x74, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12,
@@ -284,8 +333,8 @@ var file_favorate_favorate_proto_rawDesc = []byte{
 	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x1a, 0x10, 0x2e, 0x63, 0x6f, 0x6d,
 	0x6d, 0x6f, 0x6e, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x2f,
 	0x0a, 0x09, 0x47, 0x65, 0x74, 0x42, 0x79, 0x55, 0x73, 0x65, 0x72, 0x12, 0x0e, 0x2e, 0x66, 0x61,
-	0x76, 0x6f, 0x72, 0x61, 0x74, 0x65, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x1a, 0x10, 0x2e, 0x63, 0x6f,
-	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42,
+	0x76, 0x6f, 0x72, 0x61, 0x74, 0x65, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x1a, 0x10, 0x2e, 0x66, 0x61,
+	0x76, 0x6f, 0x72, 0x61, 0x74, 0x65, 0x2e, 0x43, 0x61, 0x72, 0x49, 0x64, 0x73, 0x22, 0x00, 0x42,
 	0x30, 0x5a, 0x2e, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x61,
 	0x72, 0x67, 0x6f, 0x64, 0x2d, 0x62, 0x6a, 0x2f, 0x62, 0x32, 0x63, 0x2d, 0x63, 0x75, 0x73, 0x74,
 	0x6f, 0x6d, 0x65, 0x72, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x61, 0x76, 0x6f, 0x72, 0x61, 0x74,
@@ -304,26 +353,27 @@ func file_favorate_favorate_proto_rawDescGZIP() []byte {
 	return file_favorate_favorate_proto_rawDescData
 }
 
-var file_favorate_favorate_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_favorate_favorate_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_favorate_favorate_proto_goTypes = []interface{}{
 	(*FavorateDTO)(nil),     // 0: favorate.FavorateDTO
-	(*User)(nil),            // 1: favorate.User
-	(*AddFavorateData)(nil), // 2: favorate.AddFavorateData
-	(*DeleteId)(nil),        // 3: favorate.DeleteId
-	(*common.Page)(nil),     // 4: common.Page
-	(*common.Response)(nil), // 5: common.Response
+	(*CarIds)(nil),          // 1: favorate.CarIds
+	(*User)(nil),            // 2: favorate.User
+	(*AddFavorateData)(nil), // 3: favorate.AddFavorateData
+	(*DeleteId)(nil),        // 4: favorate.DeleteId
+	(*common.Page)(nil),     // 5: common.Page
+	(*common.Response)(nil), // 6: common.Response
 }
 var file_favorate_favorate_proto_depIdxs = []int32{
 	0, // 0: favorate.Favorate.Add:input_type -> favorate.FavorateDTO
-	3, // 1: favorate.Favorate.Delete:input_type -> favorate.DeleteId
+	4, // 1: favorate.Favorate.Delete:input_type -> favorate.DeleteId
 	0, // 2: favorate.Favorate.Update:input_type -> favorate.FavorateDTO
-	4, // 3: favorate.Favorate.GetList:input_type -> common.Page
-	1, // 4: favorate.Favorate.GetByUser:input_type -> favorate.User
-	5, // 5: favorate.Favorate.Add:output_type -> common.Response
-	5, // 6: favorate.Favorate.Delete:output_type -> common.Response
-	5, // 7: favorate.Favorate.Update:output_type -> common.Response
-	5, // 8: favorate.Favorate.GetList:output_type -> common.Response
-	5, // 9: favorate.Favorate.GetByUser:output_type -> common.Response
+	5, // 3: favorate.Favorate.GetList:input_type -> common.Page
+	2, // 4: favorate.Favorate.GetByUser:input_type -> favorate.User
+	6, // 5: favorate.Favorate.Add:output_type -> common.Response
+	6, // 6: favorate.Favorate.Delete:output_type -> common.Response
+	6, // 7: favorate.Favorate.Update:output_type -> common.Response
+	6, // 8: favorate.Favorate.GetList:output_type -> common.Response
+	1, // 9: favorate.Favorate.GetByUser:output_type -> favorate.CarIds
 	5, // [5:10] is the sub-list for method output_type
 	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -350,7 +400,7 @@ func file_favorate_favorate_proto_init() {
 			}
 		}
 		file_favorate_favorate_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*User); i {
+			switch v := v.(*CarIds); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -362,7 +412,7 @@ func file_favorate_favorate_proto_init() {
 			}
 		}
 		file_favorate_favorate_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddFavorateData); i {
+			switch v := v.(*User); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -374,6 +424,18 @@ func file_favorate_favorate_proto_init() {
 			}
 		}
 		file_favorate_favorate_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddFavorateData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_favorate_favorate_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteId); i {
 			case 0:
 				return &v.state
@@ -392,7 +454,7 @@ func file_favorate_favorate_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_favorate_favorate_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
