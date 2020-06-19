@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package favorate;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
-option go_package="github.com/cargod-bj/b2c-customer-api/favorate";
+option go_package = "github.com/cargod-bj/b2c-customer-api/favorate";
 /**
   * 客户
  */
@@ -15,6 +15,8 @@ service Favorate {
   rpc Update(FavorateDTO) returns (common.Response) {}
   //获取客户列表，返回客户列表
   rpc GetList(common.Page) returns (common.Response) {}
+  //获取客户列表，返回客户列表
+  rpc GetByUser(User) returns (common.Response) {}
 
 }
 
@@ -25,7 +27,9 @@ message FavorateDTO {
   uint64 createTime = 4;
   uint64 updateTime = 5;
 }
-
+message User{
+  uint64 userId = 1;//用户姓名
+}
 message AddFavorateData{
   uint64 id = 1;
 }
