@@ -43,13 +43,13 @@ func NewFavorateEndpoints() []*api.Endpoint {
 // Client API for Favorate service
 
 type FavorateService interface {
-	//新增客户，返回data.nil
+	//新增收藏，返回data.nil
 	Add(ctx context.Context, in *FavorateDTO, opts ...client.CallOption) (*common.Response, error)
-	//删除客户，这里是假删除，设置status为1表示已删除，返回data.nil
+	//删除收藏，这里是假删除，设置status为1表示已删除，返回data.nil
 	Delete(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
-	//更新客户，返回data.nil
+	//更新收藏，返回data.nil
 	Update(ctx context.Context, in *FavorateDTO, opts ...client.CallOption) (*common.Response, error)
-	//获取客户列表，返回客户列表
+	//获取收藏列表，返回收藏列表
 	GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
 	//获取收藏的车辆iDs
 	GetByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error)
@@ -132,13 +132,13 @@ func (c *favorateService) DeleteFavorate(ctx context.Context, in *DelFavorate, o
 // Server API for Favorate service
 
 type FavorateHandler interface {
-	//新增客户，返回data.nil
+	//新增收藏，返回data.nil
 	Add(context.Context, *FavorateDTO, *common.Response) error
-	//删除客户，这里是假删除，设置status为1表示已删除，返回data.nil
+	//删除收藏，这里是假删除，设置status为1表示已删除，返回data.nil
 	Delete(context.Context, *DeleteId, *common.Response) error
-	//更新客户，返回data.nil
+	//更新收藏，返回data.nil
 	Update(context.Context, *FavorateDTO, *common.Response) error
-	//获取客户列表，返回客户列表
+	//获取收藏列表，返回收藏列表
 	GetList(context.Context, *common.Page, *common.Response) error
 	//获取收藏的车辆iDs
 	GetByUser(context.Context, *User, *common.Response) error
