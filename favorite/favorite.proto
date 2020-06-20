@@ -6,7 +6,7 @@ option go_package = "github.com/cargod-bj/b2c-customer-api/favorite";
 /**
   * 收藏
  */
-service Favorate {
+service Favorite {
   //新增收藏，返回data.nil
   rpc Add(FavoriteDTO) returns (common.Response) {}
   //删除收藏，这里是假删除，设置status为1表示已删除，返回data.nil

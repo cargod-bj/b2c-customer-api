@@ -388,7 +388,7 @@ var file_favorite_favorite_proto_rawDesc = []byte{
 	0x63, 0x61, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x63, 0x61, 0x72,
 	0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x04, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x32, 0xbe, 0x02, 0x0a, 0x08, 0x46,
-	0x61, 0x76, 0x6f, 0x72, 0x61, 0x74, 0x65, 0x12, 0x30, 0x0a, 0x03, 0x41, 0x64, 0x64, 0x12, 0x15,
+	0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x12, 0x30, 0x0a, 0x03, 0x41, 0x64, 0x64, 0x12, 0x15,
 	0x2e, 0x66, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x2e, 0x46, 0x61, 0x76, 0x6f, 0x72, 0x69,
 	0x74, 0x65, 0x44, 0x54, 0x4f, 0x1a, 0x10, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x30, 0x0a, 0x06, 0x44, 0x65, 0x6c,
@@ -439,18 +439,18 @@ var file_favorite_favorite_proto_goTypes = []interface{}{
 }
 var file_favorite_favorite_proto_depIdxs = []int32{
 	6, // 0: favorite.User.page:type_name -> common.Page
-	0, // 1: favorite.Favorate.Add:input_type -> favorite.FavoriteDTO
-	4, // 2: favorite.Favorate.Delete:input_type -> favorite.DeleteId
-	0, // 3: favorite.Favorate.Update:input_type -> favorite.FavoriteDTO
-	6, // 4: favorite.Favorate.GetList:input_type -> common.Page
-	2, // 5: favorite.Favorate.GetByUser:input_type -> favorite.User
-	5, // 6: favorite.Favorate.DeleteFavorite:input_type -> favorite.DelFavorite
-	7, // 7: favorite.Favorate.Add:output_type -> common.Response
-	7, // 8: favorite.Favorate.Delete:output_type -> common.Response
-	7, // 9: favorite.Favorate.Update:output_type -> common.Response
-	7, // 10: favorite.Favorate.GetList:output_type -> common.Response
-	7, // 11: favorite.Favorate.GetByUser:output_type -> common.Response
-	7, // 12: favorite.Favorate.DeleteFavorite:output_type -> common.Response
+	0, // 1: favorite.Favorite.Add:input_type -> favorite.FavoriteDTO
+	4, // 2: favorite.Favorite.Delete:input_type -> favorite.DeleteId
+	0, // 3: favorite.Favorite.Update:input_type -> favorite.FavoriteDTO
+	6, // 4: favorite.Favorite.GetList:input_type -> common.Page
+	2, // 5: favorite.Favorite.GetByUser:input_type -> favorite.User
+	5, // 6: favorite.Favorite.DeleteFavorite:input_type -> favorite.DelFavorite
+	7, // 7: favorite.Favorite.Add:output_type -> common.Response
+	7, // 8: favorite.Favorite.Delete:output_type -> common.Response
+	7, // 9: favorite.Favorite.Update:output_type -> common.Response
+	7, // 10: favorite.Favorite.GetList:output_type -> common.Response
+	7, // 11: favorite.Favorite.GetByUser:output_type -> common.Response
+	7, // 12: favorite.Favorite.DeleteFavorite:output_type -> common.Response
 	7, // [7:13] is the sub-list for method output_type
 	1, // [1:7] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
