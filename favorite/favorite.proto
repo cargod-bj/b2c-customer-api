@@ -4,16 +4,16 @@ package favorite;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
 option go_package = "github.com/cargod-bj/b2c-customer-api/favorite";
 /**
-  * 客户
+  * 收藏
  */
-service Favorite {
-  //新增客户，返回data.nil
-  rpc Add(FavoriteDTO) returns (common.Response) {}
-  //删除客户，这里是假删除，设置status为1表示已删除，返回data.nil
+service Favorate {
+  //新增收藏，返回data.nil
+  rpc Add(FavorateDTO) returns (common.Response) {}
+  //删除收藏，这里是假删除，设置status为1表示已删除，返回data.nil
   rpc Delete(DeleteId) returns (common.Response) {}
-  //更新客户，返回data.nil
-  rpc Update(FavoriteDTO) returns (common.Response) {}
-  //获取客户列表，返回客户列表
+  //更新收藏，返回data.nil
+  rpc Update(FavorateDTO) returns (common.Response) {}
+  //获取收藏列表，返回收藏列表
   rpc GetList(common.Page) returns (common.Response) {}
   //获取收藏的车辆iDs
   rpc GetByUser(User) returns (common.Response) {}
