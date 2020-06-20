@@ -5,6 +5,7 @@ package login
 
 import (
 	fmt "fmt"
+	_ "github.com/cargod-bj/b2c-customer-api/customer"
 	common "github.com/cargod-bj/b2c-proto-common/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
