@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package login;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
-import "customer";
+import "customer/customer.proto";
+
 option go_package = "github.com/cargod-bj/b2c-customer-api/login";
 /**
   * 登录
@@ -12,17 +13,15 @@ service Login {
   rpc SendSMS(LoginDTO) returns (common.Response) {}
   //用户登录校验，返回token
   rpc Login(LoginDTO) returns (common.Response) {}
-
 }
 
 message LoginDTO {
-  string UserName = 1;//手机号
-  string Captcha = 2;//验证码
-
+  string userName = 1;//手机号
+  string captcha = 2;//验证码
 }
 
 message LoginResponse {
-  CustomerDTO Customer = 1;
-  string Token = 2;
-  uint64 ExpiresAt = 3;//有效期到哪天月日时分秒毫秒
+  customer.CustomerDTO customer = 1;
+  string token = 2;
+  uint64 expiresAt = 3;//有效期到哪天月日时分秒毫秒
 }
