@@ -34,22 +34,22 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// Api Endpoints for Favorite service
+// Api Endpoints for Favorate service
 
-func NewFavoriteEndpoints() []*api.Endpoint {
+func NewFavorateEndpoints() []*api.Endpoint {
 	return []*api.Endpoint{}
 }
 
-// Client API for Favorite service
+// Client API for Favorate service
 
-type FavoriteService interface {
-	//新增客户，返回data.nil
+type FavorateService interface {
+	//新增收藏，返回data.nil
 	Add(ctx context.Context, in *FavoriteDTO, opts ...client.CallOption) (*common.Response, error)
-	//删除客户，这里是假删除，设置status为1表示已删除，返回data.nil
+	//删除收藏，这里是假删除，设置status为1表示已删除，返回data.nil
 	Delete(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
-	//更新客户，返回data.nil
+	//更新收藏，返回data.nil
 	Update(ctx context.Context, in *FavoriteDTO, opts ...client.CallOption) (*common.Response, error)
-	//获取客户列表，返回客户列表
+	//获取收藏列表，返回收藏列表
 	GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
 	//获取收藏的车辆iDs
 	GetByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error)
@@ -57,20 +57,20 @@ type FavoriteService interface {
 	DeleteFavorite(ctx context.Context, in *DelFavorite, opts ...client.CallOption) (*common.Response, error)
 }
 
-type favoriteService struct {
+type favorateService struct {
 	c    client.Client
 	name string
 }
 
-func NewFavoriteService(name string, c client.Client) FavoriteService {
-	return &favoriteService{
+func NewFavorateService(name string, c client.Client) FavorateService {
+	return &favorateService{
 		c:    c,
 		name: name,
 	}
 }
 
-func (c *favoriteService) Add(ctx context.Context, in *FavoriteDTO, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Favorite.Add", in)
+func (c *favorateService) Add(ctx context.Context, in *FavoriteDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Favorate.Add", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -79,8 +79,8 @@ func (c *favoriteService) Add(ctx context.Context, in *FavoriteDTO, opts ...clie
 	return out, nil
 }
 
-func (c *favoriteService) Delete(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Favorite.Delete", in)
+func (c *favorateService) Delete(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Favorate.Delete", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -89,8 +89,8 @@ func (c *favoriteService) Delete(ctx context.Context, in *DeleteId, opts ...clie
 	return out, nil
 }
 
-func (c *favoriteService) Update(ctx context.Context, in *FavoriteDTO, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Favorite.Update", in)
+func (c *favorateService) Update(ctx context.Context, in *FavoriteDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Favorate.Update", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -99,8 +99,8 @@ func (c *favoriteService) Update(ctx context.Context, in *FavoriteDTO, opts ...c
 	return out, nil
 }
 
-func (c *favoriteService) GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Favorite.GetList", in)
+func (c *favorateService) GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Favorate.GetList", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -109,8 +109,8 @@ func (c *favoriteService) GetList(ctx context.Context, in *common.Page, opts ...
 	return out, nil
 }
 
-func (c *favoriteService) GetByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Favorite.GetByUser", in)
+func (c *favorateService) GetByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Favorate.GetByUser", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -119,8 +119,8 @@ func (c *favoriteService) GetByUser(ctx context.Context, in *User, opts ...clien
 	return out, nil
 }
 
-func (c *favoriteService) DeleteFavorite(ctx context.Context, in *DelFavorite, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Favorite.DeleteFavorite", in)
+func (c *favorateService) DeleteFavorite(ctx context.Context, in *DelFavorite, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Favorate.DeleteFavorite", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -129,16 +129,16 @@ func (c *favoriteService) DeleteFavorite(ctx context.Context, in *DelFavorite, o
 	return out, nil
 }
 
-// Server API for Favorite service
+// Server API for Favorate service
 
-type FavoriteHandler interface {
-	//新增客户，返回data.nil
+type FavorateHandler interface {
+	//新增收藏，返回data.nil
 	Add(context.Context, *FavoriteDTO, *common.Response) error
-	//删除客户，这里是假删除，设置status为1表示已删除，返回data.nil
+	//删除收藏，这里是假删除，设置status为1表示已删除，返回data.nil
 	Delete(context.Context, *DeleteId, *common.Response) error
-	//更新客户，返回data.nil
+	//更新收藏，返回data.nil
 	Update(context.Context, *FavoriteDTO, *common.Response) error
-	//获取客户列表，返回客户列表
+	//获取收藏列表，返回收藏列表
 	GetList(context.Context, *common.Page, *common.Response) error
 	//获取收藏的车辆iDs
 	GetByUser(context.Context, *User, *common.Response) error
@@ -146,8 +146,8 @@ type FavoriteHandler interface {
 	DeleteFavorite(context.Context, *DelFavorite, *common.Response) error
 }
 
-func RegisterFavoriteHandler(s server.Server, hdlr FavoriteHandler, opts ...server.HandlerOption) error {
-	type favorite interface {
+func RegisterFavorateHandler(s server.Server, hdlr FavorateHandler, opts ...server.HandlerOption) error {
+	type favorate interface {
 		Add(ctx context.Context, in *FavoriteDTO, out *common.Response) error
 		Delete(ctx context.Context, in *DeleteId, out *common.Response) error
 		Update(ctx context.Context, in *FavoriteDTO, out *common.Response) error
@@ -155,37 +155,37 @@ func RegisterFavoriteHandler(s server.Server, hdlr FavoriteHandler, opts ...serv
 		GetByUser(ctx context.Context, in *User, out *common.Response) error
 		DeleteFavorite(ctx context.Context, in *DelFavorite, out *common.Response) error
 	}
-	type Favorite struct {
-		favorite
+	type Favorate struct {
+		favorate
 	}
-	h := &favoriteHandler{hdlr}
-	return s.Handle(s.NewHandler(&Favorite{h}, opts...))
+	h := &favorateHandler{hdlr}
+	return s.Handle(s.NewHandler(&Favorate{h}, opts...))
 }
 
-type favoriteHandler struct {
-	FavoriteHandler
+type favorateHandler struct {
+	FavorateHandler
 }
 
-func (h *favoriteHandler) Add(ctx context.Context, in *FavoriteDTO, out *common.Response) error {
-	return h.FavoriteHandler.Add(ctx, in, out)
+func (h *favorateHandler) Add(ctx context.Context, in *FavoriteDTO, out *common.Response) error {
+	return h.FavorateHandler.Add(ctx, in, out)
 }
 
-func (h *favoriteHandler) Delete(ctx context.Context, in *DeleteId, out *common.Response) error {
-	return h.FavoriteHandler.Delete(ctx, in, out)
+func (h *favorateHandler) Delete(ctx context.Context, in *DeleteId, out *common.Response) error {
+	return h.FavorateHandler.Delete(ctx, in, out)
 }
 
-func (h *favoriteHandler) Update(ctx context.Context, in *FavoriteDTO, out *common.Response) error {
-	return h.FavoriteHandler.Update(ctx, in, out)
+func (h *favorateHandler) Update(ctx context.Context, in *FavoriteDTO, out *common.Response) error {
+	return h.FavorateHandler.Update(ctx, in, out)
 }
 
-func (h *favoriteHandler) GetList(ctx context.Context, in *common.Page, out *common.Response) error {
-	return h.FavoriteHandler.GetList(ctx, in, out)
+func (h *favorateHandler) GetList(ctx context.Context, in *common.Page, out *common.Response) error {
+	return h.FavorateHandler.GetList(ctx, in, out)
 }
 
-func (h *favoriteHandler) GetByUser(ctx context.Context, in *User, out *common.Response) error {
-	return h.FavoriteHandler.GetByUser(ctx, in, out)
+func (h *favorateHandler) GetByUser(ctx context.Context, in *User, out *common.Response) error {
+	return h.FavorateHandler.GetByUser(ctx, in, out)
 }
 
-func (h *favoriteHandler) DeleteFavorite(ctx context.Context, in *DelFavorite, out *common.Response) error {
-	return h.FavoriteHandler.DeleteFavorite(ctx, in, out)
+func (h *favorateHandler) DeleteFavorite(ctx context.Context, in *DelFavorite, out *common.Response) error {
+	return h.FavorateHandler.DeleteFavorite(ctx, in, out)
 }
