@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package login;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+import "customer";
 option go_package = "github.com/cargod-bj/b2c-customer-api/login";
 /**
   * 登录
@@ -20,3 +21,8 @@ message LoginDTO {
 
 }
 
+message LoginResponse {
+  CustomerDTO Customer = 1;
+  string Token = 2;
+  uint64 ExpiresAt = 3;//有效期到哪天月日时分秒毫秒
+}
