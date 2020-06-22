@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package login;
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+
+option go_package = "github.com/cargod-bj/b2c-customer-api/verify";
+/**
+  * 登录
+ */
+service Verify {
+  //创建验证码，返回data.nil
+  rpc CreateVerify(LoginDto) returns (common.Response) {}
+  //通过phone拿到验证码
+  rpc GetVerifyByPhone(LoginDto) returns (common.Response) {}
+}
+
+message VerifyDto {
+  uint64 id = 1;
+  string phone = 2;
+  string verifyCode = 3;
+  uint64 createTime = 4;
+}
+message LoginDto {
+  string phone = 1;
+  string captcha = 2;
+}
