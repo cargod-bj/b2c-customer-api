@@ -28,7 +28,7 @@ message CustomerDTO {
   string loginName = 3;//用户名
   string email = 4;
   string icon = 5;
-  string mobile = 6;
+  string ContactNo = 6;
   string password = 7;
   uint32 gender = 8;//性别1是女，2是男
   string birthday = 9;
