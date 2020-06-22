@@ -49,7 +49,7 @@ type CustomerService interface {
 	Delete(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
 	//更新客户，返回data.nil
 	Update(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
-	//获取客户根据客户登录名
+	//获取客户根据入参条件
 	GetCustomer(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
 	//获取客户列表，返回客户列表
 	GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
@@ -126,7 +126,7 @@ type CustomerHandler interface {
 	Delete(context.Context, *DeleteId, *common.Response) error
 	//更新客户，返回data.nil
 	Update(context.Context, *CustomerDTO, *common.Response) error
-	//获取客户根据客户登录名
+	//获取客户根据入参条件
 	GetCustomer(context.Context, *CustomerDTO, *common.Response) error
 	//获取客户列表，返回客户列表
 	GetList(context.Context, *common.Page, *common.Response) error
