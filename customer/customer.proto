@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package customer;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
-option go_package="github.com/cargod-bj/b2c-customer-api/customer";
+option go_package = "github.com/cargod-bj/b2c-customer-api/customer";
 /**
   * 客户
  */
@@ -54,6 +54,6 @@ message DeleteId{
 }
 
 message IdListDto{
-  uint64 id = 1;
+  repeated uint64 id = 1;
 }
 
