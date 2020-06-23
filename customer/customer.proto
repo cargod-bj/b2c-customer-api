@@ -19,7 +19,8 @@ service Customer {
   rpc GetList(common.Page) returns (common.Response) {}
   //根据入参条件模糊搜索用户信息
   rpc GetCustomerByCond(CustomerDTO) returns (common.Response) {}
-
+  //根据 userid批量获取用户信息
+  rpc GetCustomerList(IdListDto) returns (common.Response) {}
 }
 
 message CustomerDTO {
@@ -49,6 +50,10 @@ message AddCustomerData{
   uint64 id = 1;
 }
 message DeleteId{
+  uint64 id = 1;
+}
+
+message IdListDto{
   uint64 id = 1;
 }
 

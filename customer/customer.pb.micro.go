@@ -55,6 +55,8 @@ type CustomerService interface {
 	GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
 	//根据入参条件模糊搜索用户信息
 	GetCustomerByCond(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
+	//根据 userid批量获取用户信息
+	GetCustomerList(ctx context.Context, in *IdListDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -129,6 +131,16 @@ func (c *customerService) GetCustomerByCond(ctx context.Context, in *CustomerDTO
 	return out, nil
 }
 
+func (c *customerService) GetCustomerList(ctx context.Context, in *IdListDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.GetCustomerList", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Customer service
 
 type CustomerHandler interface {
@@ -144,6 +156,8 @@ type CustomerHandler interface {
 	GetList(context.Context, *common.Page, *common.Response) error
 	//根据入参条件模糊搜索用户信息
 	GetCustomerByCond(context.Context, *CustomerDTO, *common.Response) error
+	//根据 userid批量获取用户信息
+	GetCustomerList(context.Context, *IdListDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -154,6 +168,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetCustomer(ctx context.Context, in *CustomerDTO, out *common.Response) error
 		GetList(ctx context.Context, in *common.Page, out *common.Response) error
 		GetCustomerByCond(ctx context.Context, in *CustomerDTO, out *common.Response) error
+		GetCustomerList(ctx context.Context, in *IdListDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -188,4 +203,8 @@ func (h *customerHandler) GetList(ctx context.Context, in *common.Page, out *com
 
 func (h *customerHandler) GetCustomerByCond(ctx context.Context, in *CustomerDTO, out *common.Response) error {
 	return h.CustomerHandler.GetCustomerByCond(ctx, in, out)
+}
+
+func (h *customerHandler) GetCustomerList(ctx context.Context, in *IdListDto, out *common.Response) error {
+	return h.CustomerHandler.GetCustomerList(ctx, in, out)
 }
