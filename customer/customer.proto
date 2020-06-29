@@ -37,7 +37,7 @@ message CustomerDTO {
   uint64 updateTime = 11;
   string source = 12;
   string customerId = 13;
-  uint64 storeId = 14;
+  uint64 staffId = 14;
 
 }
 
