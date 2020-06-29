@@ -21,6 +21,8 @@ service Customer {
   rpc GetCustomerByCond(CustomerDTO) returns (common.Response) {}
   //根据 userid批量获取用户信息
   rpc GetCustomerList(IdListDto) returns (common.Response) {}
+  //批量分配用户到PIC
+  rpc AssignCustomer(AssignDto) returns (common.Response) {}
 }
 
 message CustomerDTO {
@@ -60,4 +62,7 @@ message DeleteId{
 message IdListDto{
   repeated uint64 id = 1;
 }
-
+message AssignDto{
+  repeated uint64 ids = 1;
+  uint64 StaffId = 2;
+}
