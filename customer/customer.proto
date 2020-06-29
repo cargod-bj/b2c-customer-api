@@ -39,6 +39,7 @@ message CustomerDTO {
   string customerId = 13;
   uint64 staffId = 14;
   uint64 storeId = 15;
+  repeated uint64 staffIds = 16;
 
 }
 
