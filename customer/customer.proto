@@ -38,6 +38,7 @@ message CustomerDTO {
   string source = 12;
   string customerId = 13;
   uint64 staffId = 14;
+  uint64 storeId = 15;
 
 }
 
