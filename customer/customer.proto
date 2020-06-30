@@ -15,8 +15,8 @@ service Customer {
   rpc Update(CustomerDTO) returns (common.Response) {}
   //获取客户根据登录名(手机号)
   rpc GetCustomer(CustomerDTO) returns (common.Response) {}
-  //获取客户列表，返回客户列表
-  rpc GetList(common.Page) returns (common.Response) {}
+  //根据分页信息+查询条件查询客户信息
+  rpc GetList(CustCondDto) returns (common.Response) {}
   //根据入参条件模糊搜索用户信息
   rpc GetCustomerByCond(CustomerDTO) returns (common.Response) {}
   //根据 userid批量获取用户信息
@@ -66,4 +66,10 @@ message AssignDto{
   repeated uint64 ids = 1;
   uint64 StaffId = 2;
   uint64 StoreId = 3;
+}
+
+message CustCondDto{
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  string ContactNo = 3;
 }
