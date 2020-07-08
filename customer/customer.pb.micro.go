@@ -49,10 +49,16 @@ type CustomerService interface {
 	Delete(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
 	//更新客户，返回data.nil
 	Update(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
-	//获取客户根据客户登录名
+	//获取客户根据登录名(手机号)
 	GetCustomer(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
-	//获取客户列表，返回客户列表
-	GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
+	//根据分页信息+查询条件查询客户信息
+	GetList(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error)
+	//根据入参条件模糊搜索用户信息
+	GetCustomerByCond(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
+	//根据 userid批量获取用户信息
+	GetCustomerList(ctx context.Context, in *IdListDto, opts ...client.CallOption) (*common.Response, error)
+	//批量分配用户到PIC
+	AssignCustomer(ctx context.Context, in *AssignDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -107,8 +113,38 @@ func (c *customerService) GetCustomer(ctx context.Context, in *CustomerDTO, opts
 	return out, nil
 }
 
-func (c *customerService) GetList(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error) {
+func (c *customerService) GetList(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Customer.GetList", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) GetCustomerByCond(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.GetCustomerByCond", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) GetCustomerList(ctx context.Context, in *IdListDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.GetCustomerList", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) AssignCustomer(ctx context.Context, in *AssignDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.AssignCustomer", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -126,10 +162,16 @@ type CustomerHandler interface {
 	Delete(context.Context, *DeleteId, *common.Response) error
 	//更新客户，返回data.nil
 	Update(context.Context, *CustomerDTO, *common.Response) error
-	//获取客户根据客户登录名
+	//获取客户根据登录名(手机号)
 	GetCustomer(context.Context, *CustomerDTO, *common.Response) error
-	//获取客户列表，返回客户列表
-	GetList(context.Context, *common.Page, *common.Response) error
+	//根据分页信息+查询条件查询客户信息
+	GetList(context.Context, *CustCondDto, *common.Response) error
+	//根据入参条件模糊搜索用户信息
+	GetCustomerByCond(context.Context, *CustomerDTO, *common.Response) error
+	//根据 userid批量获取用户信息
+	GetCustomerList(context.Context, *IdListDto, *common.Response) error
+	//批量分配用户到PIC
+	AssignCustomer(context.Context, *AssignDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -138,7 +180,10 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		Delete(ctx context.Context, in *DeleteId, out *common.Response) error
 		Update(ctx context.Context, in *CustomerDTO, out *common.Response) error
 		GetCustomer(ctx context.Context, in *CustomerDTO, out *common.Response) error
-		GetList(ctx context.Context, in *common.Page, out *common.Response) error
+		GetList(ctx context.Context, in *CustCondDto, out *common.Response) error
+		GetCustomerByCond(ctx context.Context, in *CustomerDTO, out *common.Response) error
+		GetCustomerList(ctx context.Context, in *IdListDto, out *common.Response) error
+		AssignCustomer(ctx context.Context, in *AssignDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -167,6 +212,18 @@ func (h *customerHandler) GetCustomer(ctx context.Context, in *CustomerDTO, out 
 	return h.CustomerHandler.GetCustomer(ctx, in, out)
 }
 
-func (h *customerHandler) GetList(ctx context.Context, in *common.Page, out *common.Response) error {
+func (h *customerHandler) GetList(ctx context.Context, in *CustCondDto, out *common.Response) error {
 	return h.CustomerHandler.GetList(ctx, in, out)
+}
+
+func (h *customerHandler) GetCustomerByCond(ctx context.Context, in *CustomerDTO, out *common.Response) error {
+	return h.CustomerHandler.GetCustomerByCond(ctx, in, out)
+}
+
+func (h *customerHandler) GetCustomerList(ctx context.Context, in *IdListDto, out *common.Response) error {
+	return h.CustomerHandler.GetCustomerList(ctx, in, out)
+}
+
+func (h *customerHandler) AssignCustomer(ctx context.Context, in *AssignDto, out *common.Response) error {
+	return h.CustomerHandler.AssignCustomer(ctx, in, out)
 }

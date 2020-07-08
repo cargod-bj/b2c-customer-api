@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package customer;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
-option go_package="github.com/cargod-bj/b2c-customer-api/customer";
+option go_package = "github.com/cargod-bj/b2c-customer-api/customer";
 /**
   * 客户
  */
@@ -13,11 +13,16 @@ service Customer {
   rpc Delete(DeleteId) returns (common.Response) {}
   //更新客户，返回data.nil
   rpc Update(CustomerDTO) returns (common.Response) {}
-  //获取客户根据客户登录名
+  //获取客户根据登录名(手机号)
   rpc GetCustomer(CustomerDTO) returns (common.Response) {}
-  //获取客户列表，返回客户列表
-  rpc GetList(common.Page) returns (common.Response) {}
-
+  //根据分页信息+查询条件查询客户信息
+  rpc GetList(CustCondDto) returns (common.Response) {}
+  //根据入参条件模糊搜索用户信息
+  rpc GetCustomerByCond(CustomerDTO) returns (common.Response) {}
+  //根据 userid批量获取用户信息
+  rpc GetCustomerList(IdListDto) returns (common.Response) {}
+  //批量分配用户到PIC
+  rpc AssignCustomer(AssignDto) returns (common.Response) {}
 }
 
 message CustomerDTO {
@@ -26,14 +31,18 @@ message CustomerDTO {
   string loginName = 3;//用户名
   string email = 4;
   string icon = 5;
-  string mobile = 6;
+  string ContactNo = 6;
   string password = 7;
   uint32 gender = 8;//性别1是女，2是男
   string birthday = 9;
   uint64 createTime = 10;
   uint64 updateTime = 11;
   string source = 12;
-  string uuid = 13;
+  string customerId = 13;
+  uint64 staffId = 14;
+  uint64 storeId = 15;
+  repeated uint64 staffIds = 16;
+
 }
 
 message CustomerList {
@@ -50,3 +59,17 @@ message DeleteId{
   uint64 id = 1;
 }
 
+message IdListDto{
+  repeated uint64 id = 1;
+}
+message AssignDto{
+  repeated uint64 ids = 1;
+  uint64 StaffId = 2;
+  uint64 StoreId = 3;
+}
+
+message CustCondDto{
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  string ContactNo = 3;
+}
