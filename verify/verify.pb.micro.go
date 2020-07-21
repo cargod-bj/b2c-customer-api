@@ -47,6 +47,8 @@ type VerifyService interface {
 	CreateVerify(ctx context.Context, in *LoginDto, opts ...client.CallOption) (*common.Response, error)
 	//通过phone拿到验证码
 	GetVerifyByPhone(ctx context.Context, in *LoginDto, opts ...client.CallOption) (*common.Response, error)
+	//更改验证码信息
+	UpdateVerify(ctx context.Context, in *LoginDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type verifyService struct {
@@ -81,6 +83,16 @@ func (c *verifyService) GetVerifyByPhone(ctx context.Context, in *LoginDto, opts
 	return out, nil
 }
 
+func (c *verifyService) UpdateVerify(ctx context.Context, in *LoginDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Verify.UpdateVerify", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Verify service
 
 type VerifyHandler interface {
@@ -88,12 +100,15 @@ type VerifyHandler interface {
 	CreateVerify(context.Context, *LoginDto, *common.Response) error
 	//通过phone拿到验证码
 	GetVerifyByPhone(context.Context, *LoginDto, *common.Response) error
+	//更改验证码信息
+	UpdateVerify(context.Context, *LoginDto, *common.Response) error
 }
 
 func RegisterVerifyHandler(s server.Server, hdlr VerifyHandler, opts ...server.HandlerOption) error {
 	type verify interface {
 		CreateVerify(ctx context.Context, in *LoginDto, out *common.Response) error
 		GetVerifyByPhone(ctx context.Context, in *LoginDto, out *common.Response) error
+		UpdateVerify(ctx context.Context, in *LoginDto, out *common.Response) error
 	}
 	type Verify struct {
 		verify
@@ -112,4 +127,8 @@ func (h *verifyHandler) CreateVerify(ctx context.Context, in *LoginDto, out *com
 
 func (h *verifyHandler) GetVerifyByPhone(ctx context.Context, in *LoginDto, out *common.Response) error {
 	return h.VerifyHandler.GetVerifyByPhone(ctx, in, out)
+}
+
+func (h *verifyHandler) UpdateVerify(ctx context.Context, in *LoginDto, out *common.Response) error {
+	return h.VerifyHandler.UpdateVerify(ctx, in, out)
 }
