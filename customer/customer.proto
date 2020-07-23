@@ -72,4 +72,11 @@ message CustCondDto{
   uint32 pageNo = 1;
   uint32 pageSize = 2;
   string ContactNo = 3;
+  string name = 4;//用户姓名
+  string email = 5;
+  string customerId = 6;
+  uint64 staffId = 7;
+  repeated uint64 staffIds = 8;
+  uint64 storeId = 15;
+
 }
