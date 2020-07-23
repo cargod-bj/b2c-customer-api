@@ -12,6 +12,8 @@ service Verify {
   rpc CreateVerify(LoginDto) returns (common.Response) {}
   //通过phone拿到验证码
   rpc GetVerifyByPhone(LoginDto) returns (common.Response) {}
+  //更改验证码信息
+  rpc UpdateVerify(VerifyDto) returns (common.Response) {}
 }
 
 message VerifyDto {
@@ -19,6 +21,7 @@ message VerifyDto {
   string phone = 2;
   string verifyCode = 3;
   uint64 createTime = 4;
+  uint32 errorCount = 5;
 }
 message LoginDto {
   string phone = 1;
