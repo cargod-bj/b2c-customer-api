@@ -61,6 +61,7 @@ message DeleteId{
 
 message IdListDto{
   repeated uint64 id = 1;
+  uint64 storeId = 2;
 }
 message AssignDto{
   repeated uint64 ids = 1;
