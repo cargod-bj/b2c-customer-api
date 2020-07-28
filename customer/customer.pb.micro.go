@@ -53,12 +53,14 @@ type CustomerService interface {
 	GetCustomer(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
 	//根据分页信息+查询条件查询客户信息
 	GetList(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error)
-	//根据入参条件模糊搜索用户信息
+	//根据入参条件模糊搜索用户信息 不分页
 	GetCustomerByCond(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
 	//根据 userid批量获取用户信息
 	GetCustomerList(ctx context.Context, in *IdListDto, opts ...client.CallOption) (*common.Response, error)
 	//批量分配用户到PIC
 	AssignCustomer(ctx context.Context, in *AssignDto, opts ...client.CallOption) (*common.Response, error)
+	//根据手机号精准搜索客户信息 分页
+	GetCustomerByContactNo(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -153,6 +155,16 @@ func (c *customerService) AssignCustomer(ctx context.Context, in *AssignDto, opt
 	return out, nil
 }
 
+func (c *customerService) GetCustomerByContactNo(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.GetCustomerByContactNo", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Customer service
 
 type CustomerHandler interface {
@@ -166,12 +178,14 @@ type CustomerHandler interface {
 	GetCustomer(context.Context, *CustomerDTO, *common.Response) error
 	//根据分页信息+查询条件查询客户信息
 	GetList(context.Context, *CustCondDto, *common.Response) error
-	//根据入参条件模糊搜索用户信息
+	//根据入参条件模糊搜索用户信息 不分页
 	GetCustomerByCond(context.Context, *CustomerDTO, *common.Response) error
 	//根据 userid批量获取用户信息
 	GetCustomerList(context.Context, *IdListDto, *common.Response) error
 	//批量分配用户到PIC
 	AssignCustomer(context.Context, *AssignDto, *common.Response) error
+	//根据手机号精准搜索客户信息 分页
+	GetCustomerByContactNo(context.Context, *CustCondDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -184,6 +198,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetCustomerByCond(ctx context.Context, in *CustomerDTO, out *common.Response) error
 		GetCustomerList(ctx context.Context, in *IdListDto, out *common.Response) error
 		AssignCustomer(ctx context.Context, in *AssignDto, out *common.Response) error
+		GetCustomerByContactNo(ctx context.Context, in *CustCondDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -226,4 +241,8 @@ func (h *customerHandler) GetCustomerList(ctx context.Context, in *IdListDto, ou
 
 func (h *customerHandler) AssignCustomer(ctx context.Context, in *AssignDto, out *common.Response) error {
 	return h.CustomerHandler.AssignCustomer(ctx, in, out)
+}
+
+func (h *customerHandler) GetCustomerByContactNo(ctx context.Context, in *CustCondDto, out *common.Response) error {
+	return h.CustomerHandler.GetCustomerByContactNo(ctx, in, out)
 }

@@ -17,12 +17,14 @@ service Customer {
   rpc GetCustomer(CustomerDTO) returns (common.Response) {}
   //根据分页信息+查询条件查询客户信息
   rpc GetList(CustCondDto) returns (common.Response) {}
-  //根据入参条件模糊搜索用户信息
+  //根据入参条件模糊搜索用户信息 不分页
   rpc GetCustomerByCond(CustomerDTO) returns (common.Response) {}
   //根据 userid批量获取用户信息
   rpc GetCustomerList(IdListDto) returns (common.Response) {}
   //批量分配用户到PIC
   rpc AssignCustomer(AssignDto) returns (common.Response) {}
+  //根据手机号精准搜索客户信息 分页
+  rpc GetCustomerByContactNo(CustCondDto) returns (common.Response) {}
 }
 
 message CustomerDTO {
