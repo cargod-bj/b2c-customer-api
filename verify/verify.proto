@@ -22,6 +22,7 @@ message VerifyDto {
   string verifyCode = 3;
   uint64 createTime = 4;
   uint32 errorCount = 5;
+  uint64 updateTime = 6;
 }
 message LoginDto {
   string phone = 1;
