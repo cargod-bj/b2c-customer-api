@@ -14,6 +14,7 @@ service Verify {
   rpc GetVerifyByPhone(LoginDto) returns (common.Response) {}
   //更改验证码信息
   rpc UpdateVerify(VerifyDto) returns (common.Response) {}
+  //
 }
 
 message VerifyDto {
