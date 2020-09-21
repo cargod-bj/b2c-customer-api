@@ -25,6 +25,8 @@ service Customer {
   rpc AssignCustomer(AssignDto) returns (common.Response) {}
   //根据手机号精准搜索客户信息 分页
   rpc GetCustomerByContactNo(CustCondDto) returns (common.Response) {}
+  //根据userId搜索客户信息
+  rpc GetCustomerByIds(IdList) returns (common.Response) {}
 }
 
 message CustomerDTO {
@@ -60,6 +62,9 @@ message AddCustomerData{
 }
 message DeleteId{
   uint64 id = 1;
+}
+message IdList{
+  repeated uint64 id = 1;
 }
 
 message IdListDto{
