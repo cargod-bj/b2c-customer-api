@@ -114,6 +114,6 @@ message CustomerResult {
 }
 
 message StorePic{
-  uint64 StaffId = 2;
-  uint64 StoreId = 3;
+  uint64 staffId = 1;
+  uint64 storeId = 2;
 }
