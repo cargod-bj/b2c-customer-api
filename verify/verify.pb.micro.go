@@ -49,6 +49,7 @@ type VerifyService interface {
 	GetVerifyByPhone(ctx context.Context, in *LoginDto, opts ...client.CallOption) (*common.Response, error)
 	//更改验证码信息
 	UpdateVerify(ctx context.Context, in *VerifyDto, opts ...client.CallOption) (*common.Response, error)
+	SendSMS(ctx context.Context, in *SmsDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type verifyService struct {
@@ -93,6 +94,16 @@ func (c *verifyService) UpdateVerify(ctx context.Context, in *VerifyDto, opts ..
 	return out, nil
 }
 
+func (c *verifyService) SendSMS(ctx context.Context, in *SmsDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Verify.SendSMS", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Verify service
 
 type VerifyHandler interface {
@@ -102,6 +113,7 @@ type VerifyHandler interface {
 	GetVerifyByPhone(context.Context, *LoginDto, *common.Response) error
 	//更改验证码信息
 	UpdateVerify(context.Context, *VerifyDto, *common.Response) error
+	SendSMS(context.Context, *SmsDto, *common.Response) error
 }
 
 func RegisterVerifyHandler(s server.Server, hdlr VerifyHandler, opts ...server.HandlerOption) error {
@@ -109,6 +121,7 @@ func RegisterVerifyHandler(s server.Server, hdlr VerifyHandler, opts ...server.H
 		CreateVerify(ctx context.Context, in *LoginDto, out *common.Response) error
 		GetVerifyByPhone(ctx context.Context, in *LoginDto, out *common.Response) error
 		UpdateVerify(ctx context.Context, in *VerifyDto, out *common.Response) error
+		SendSMS(ctx context.Context, in *SmsDto, out *common.Response) error
 	}
 	type Verify struct {
 		verify
@@ -131,4 +144,8 @@ func (h *verifyHandler) GetVerifyByPhone(ctx context.Context, in *LoginDto, out 
 
 func (h *verifyHandler) UpdateVerify(ctx context.Context, in *VerifyDto, out *common.Response) error {
 	return h.VerifyHandler.UpdateVerify(ctx, in, out)
+}
+
+func (h *verifyHandler) SendSMS(ctx context.Context, in *SmsDto, out *common.Response) error {
+	return h.VerifyHandler.SendSMS(ctx, in, out)
 }

@@ -14,6 +14,8 @@ service Verify {
   rpc GetVerifyByPhone(LoginDto) returns (common.Response) {}
   //更改验证码信息
   rpc UpdateVerify(VerifyDto) returns (common.Response) {}
+
+  rpc SendSMS(SmsDto) returns (common.Response) {}
   //
 }
 
@@ -25,7 +27,13 @@ message VerifyDto {
   uint32 requestCount = 5;
   uint64 updateTime = 6;
 }
+
 message LoginDto {
   string phone = 1;
   string captcha = 2;
+}
+message SmsDto {
+  string From = 1;
+  string Phone = 2;
+  string Text = 3;
 }
