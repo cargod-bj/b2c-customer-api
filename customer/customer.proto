@@ -47,6 +47,7 @@ message CustomerDTO {
   uint64 storeId = 15;
   repeated uint64 staffIds = 16;
   uint32 race = 17;
+  repeated uint64 storeIds = 18;
 
 }
 
