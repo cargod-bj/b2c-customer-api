@@ -47,6 +47,7 @@ message CustomerDTO {
   uint64 storeId = 15;
   repeated uint64 staffIds = 16;
   uint32 race = 17;
+  repeated uint64 storeIds = 18;
 
 }
 
@@ -89,5 +90,31 @@ message CustCondDto{
   uint64 staffId = 7;
   repeated uint64 staffIds = 8;
   uint64 storeId = 15;
+  repeated uint64 storeIds = 16;
+}
 
+message CustomerResult {
+  uint64 id = 1;
+  string name = 2;//用户姓名
+  string loginName = 3;//用户名
+  string email = 4;
+  string icon = 5;
+  string ContactNo = 6;
+  string password = 7;
+  uint32 gender = 8;//性别1是女，2是男
+  string birthday = 9;
+  uint64 createTime = 10;
+  uint64 updateTime = 11;
+  string source = 12;
+  string customerId = 13;
+  uint64 staffId = 14;
+  uint64 storeId = 15;
+  repeated uint64 staffIds = 16;
+  uint32 race = 17;
+  repeated StorePic storePic = 18;
+}
+
+message StorePic{
+  uint64 staffId = 1;
+  uint64 storeId = 2;
 }
