@@ -29,6 +29,8 @@ service Customer {
   rpc GetCustomerByIds(IdList) returns (common.Response) {}
   //回收邮件
   rpc GetMail(DeleteId) returns (common.Response) {}
+  //通过门店和customerId获取人员的PIC
+  rpc GetCustomerPIC(CustomerDTO) returns (common.Response) {}
 }
 
 message CustomerDTO {
