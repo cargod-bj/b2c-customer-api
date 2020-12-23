@@ -30,7 +30,7 @@ service Customer {
   //回收邮件
   rpc GetMail(DeleteId) returns (common.Response) {}
   //拉取C2B拓客列表
-  rpc GetC2BCustomerList(DeleteId) returns (common.Response) {}
+  rpc GetC2BCustomerList(C2BCondDto) returns (common.Response) {}
 }
 
 message CustomerDTO {

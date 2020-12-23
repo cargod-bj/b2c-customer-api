@@ -66,7 +66,7 @@ type CustomerService interface {
 	//回收邮件
 	GetMail(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
 	//拉取C2B拓客列表
-	GetC2BCustomerList(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
+	GetC2BCustomerList(ctx context.Context, in *C2BCondDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -191,7 +191,7 @@ func (c *customerService) GetMail(ctx context.Context, in *DeleteId, opts ...cli
 	return out, nil
 }
 
-func (c *customerService) GetC2BCustomerList(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error) {
+func (c *customerService) GetC2BCustomerList(ctx context.Context, in *C2BCondDto, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Customer.GetC2BCustomerList", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -227,7 +227,7 @@ type CustomerHandler interface {
 	//回收邮件
 	GetMail(context.Context, *DeleteId, *common.Response) error
 	//拉取C2B拓客列表
-	GetC2BCustomerList(context.Context, *DeleteId, *common.Response) error
+	GetC2BCustomerList(context.Context, *C2BCondDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -243,7 +243,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetCustomerByContactNo(ctx context.Context, in *CustCondDto, out *common.Response) error
 		GetCustomerByIds(ctx context.Context, in *IdList, out *common.Response) error
 		GetMail(ctx context.Context, in *DeleteId, out *common.Response) error
-		GetC2BCustomerList(ctx context.Context, in *DeleteId, out *common.Response) error
+		GetC2BCustomerList(ctx context.Context, in *C2BCondDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -300,6 +300,6 @@ func (h *customerHandler) GetMail(ctx context.Context, in *DeleteId, out *common
 	return h.CustomerHandler.GetMail(ctx, in, out)
 }
 
-func (h *customerHandler) GetC2BCustomerList(ctx context.Context, in *DeleteId, out *common.Response) error {
+func (h *customerHandler) GetC2BCustomerList(ctx context.Context, in *C2BCondDto, out *common.Response) error {
 	return h.CustomerHandler.GetC2BCustomerList(ctx, in, out)
 }
