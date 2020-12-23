@@ -29,6 +29,8 @@ service Customer {
   rpc GetCustomerByIds(IdList) returns (common.Response) {}
   //回收邮件
   rpc GetMail(DeleteId) returns (common.Response) {}
+  //拉取C2B拓客列表
+  rpc GetC2BCustomerList(DeleteId) returns (common.Response) {}
 }
 
 message CustomerDTO {
@@ -119,4 +121,31 @@ message CustomerResult {
 message StorePic{
   uint64 staffId = 1;
   uint64 storeId = 2;
+}
+message C2BCondDto{
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  string contactNo = 3;
+  // 是否是C2B客户
+  uint64 source = 5;
+  // 开始时间
+  uint64 dateBegin = 6;
+  // 结束时间
+  uint64 dateEnd = 7;
+  // 拓客人员ID
+  uint64 marketingPersonnelId = 8;
+}
+message C2BCustomerResult{
+  uint64 id = 1;
+  string name = 2;//用户姓名
+  string loginName = 3;//用户名
+  string email = 4;
+  string icon = 5;
+  string ContactNo = 6;
+  uint32 gender = 7;//性别1是女，2是男
+  string birthday = 8;
+  string source = 9;
+  string customerId = 10;
+  uint32 race = 11;
+  uint64 couponIssuanceTime = 12;
 }
