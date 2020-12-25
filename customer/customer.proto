@@ -136,16 +136,10 @@ message C2BCondDto{
   uint64 marketingPersonnelId = 8;
 }
 message C2BCustomerResult{
-  uint64 id = 1;
-  string name = 2;//用户姓名
-  string loginName = 3;//用户名
-  string email = 4;
-  string icon = 5;
-  string ContactNo = 6;
-  uint32 gender = 7;//性别1是女，2是男
-  string birthday = 8;
-  string source = 9;
-  string customerId = 10;
-  uint32 race = 11;
-  uint64 couponIssuanceTime = 12;
+  string customerId = 1;//customerId
+  string contactNo = 2;//手机号
+  uint32 verify = 3;//是否通过验证
+  string source = 4;//客户来源
+  uint64 couponIssuanceTime = 5;//优惠券发放时间
+  uint64 createTime = 6;//创建时间
 }
