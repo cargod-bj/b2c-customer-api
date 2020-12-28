@@ -132,8 +132,9 @@ message C2BCondDto{
   uint64 dateBegin = 6;
   // 结束时间
   uint64 dateEnd = 7;
+  string customerId = 8;
   // 拓客人员ID
-  uint64 marketingPersonnel = 8;
+  uint64 marketingPersonnel = 9;
 }
 message C2BCustomerResult{
   string customerId = 1;//customerId
