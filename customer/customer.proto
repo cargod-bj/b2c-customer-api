@@ -126,15 +126,18 @@ message C2BCondDto{
   uint32 pageNo = 1;
   uint32 pageSize = 2;
   string contactNo = 3;
-  // 是否是C2B客户
+  // 客户来源
   uint64 source = 5;
+  // 是否验证 1已验证，9 未验证
+  uint64 verify = 6;
   // 开始时间
-  uint64 dateBegin = 6;
+  uint64 dateBegin = 7;
   // 结束时间
-  uint64 dateEnd = 7;
-  string customerId = 8;
+  uint64 dateEnd = 8;
+  //
+  string customerId = 9;
   // 拓客人员ID
-  uint64 marketingPersonnel = 9;
+  uint64 marketingPersonnel = 10;
 }
 message C2BCustomerResult{
   string customerId = 1;//customerId
