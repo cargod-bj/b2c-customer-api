@@ -52,6 +52,7 @@ message CustomerDTO {
   repeated uint64 staffIds = 16;
   uint32 race = 17;
   repeated uint64 storeIds = 18;
+  string data = 19;//营销附加参数
 
 }
 
