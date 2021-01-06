@@ -30,7 +30,12 @@ service Customer {
   //回收邮件
   rpc GetMail(DeleteId) returns (common.Response) {}
   //通过门店和customerId获取人员的PIC
-  rpc GetCustomerPIC(CustomerDTO) returns (common.Response) {}
+  rpc GetCustomerPIC(QueryPicDTO) returns (common.Response) {}
+}
+
+message QueryPicDTO{
+  uint64 storeId = 1;
+  uint64 customerId = 2;
 }
 
 message CustomerDTO {
