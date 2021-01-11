@@ -67,6 +67,8 @@ type CustomerService interface {
 	GetMail(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
 	//拉取C2B拓客列表
 	GetC2BCustomerList(ctx context.Context, in *C2BCondDto, opts ...client.CallOption) (*common.Response, error)
+	//存储营销客户相关验证数据
+	AddMarketVerifyData(ctx context.Context, in *MarketVerifyData, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -201,6 +203,16 @@ func (c *customerService) GetC2BCustomerList(ctx context.Context, in *C2BCondDto
 	return out, nil
 }
 
+func (c *customerService) AddMarketVerifyData(ctx context.Context, in *MarketVerifyData, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.AddMarketVerifyData", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Customer service
 
 type CustomerHandler interface {
@@ -228,6 +240,8 @@ type CustomerHandler interface {
 	GetMail(context.Context, *DeleteId, *common.Response) error
 	//拉取C2B拓客列表
 	GetC2BCustomerList(context.Context, *C2BCondDto, *common.Response) error
+	//存储营销客户相关验证数据
+	AddMarketVerifyData(context.Context, *MarketVerifyData, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -244,6 +258,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetCustomerByIds(ctx context.Context, in *IdList, out *common.Response) error
 		GetMail(ctx context.Context, in *DeleteId, out *common.Response) error
 		GetC2BCustomerList(ctx context.Context, in *C2BCondDto, out *common.Response) error
+		AddMarketVerifyData(ctx context.Context, in *MarketVerifyData, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -302,4 +317,8 @@ func (h *customerHandler) GetMail(ctx context.Context, in *DeleteId, out *common
 
 func (h *customerHandler) GetC2BCustomerList(ctx context.Context, in *C2BCondDto, out *common.Response) error {
 	return h.CustomerHandler.GetC2BCustomerList(ctx, in, out)
+}
+
+func (h *customerHandler) AddMarketVerifyData(ctx context.Context, in *MarketVerifyData, out *common.Response) error {
+	return h.CustomerHandler.AddMarketVerifyData(ctx, in, out)
 }

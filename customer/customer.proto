@@ -31,6 +31,8 @@ service Customer {
   rpc GetMail(DeleteId) returns (common.Response) {}
   //拉取C2B拓客列表
   rpc GetC2BCustomerList(C2BCondDto) returns (common.Response) {}
+  //存储营销客户相关验证数据
+  rpc AddMarketVerifyData(MarketVerifyData) returns (common.Response) {}
 }
 
 message CustomerDTO {
@@ -52,9 +54,8 @@ message CustomerDTO {
   repeated uint64 staffIds = 16;
   uint32 race = 17;
   repeated uint64 storeIds = 18;
-  string data = 19;//营销附加参数
-  uint64 marketingPersonnel = 20;//营销人员ID
-  bool verify = 21;//是否验证
+  uint64 marketingPersonnel = 19;//营销人员ID
+  bool verify = 20;//是否验证
 
 }
 
@@ -130,7 +131,7 @@ message C2BCondDto{
   uint32 pageSize = 2;
   string contactNo = 3;
   // 客户来源
-  uint64 source = 5;
+  string source = 5;
   // 是否验证 1已验证，9 未验证
   uint64 verify = 6;
   // 开始时间
@@ -149,4 +150,11 @@ message C2BCustomerResult{
   string source = 4;//客户来源
   uint64 couponIssuanceTime = 5;//优惠券发放时间
   uint64 createTime = 6;//创建时间
+}
+
+message MarketVerifyData{
+  string contactNo = 2;//手机号
+  bool verify = 3;//是否通过验证
+  string source = 4;//客户来源
+  string data = 19;//营销附加参数
 }
