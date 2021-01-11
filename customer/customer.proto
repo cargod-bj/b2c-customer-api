@@ -154,6 +154,7 @@ message C2BCustomerResult{
   string source = 4;//客户来源
   uint64 couponIssuanceTime = 5;//优惠券发放时间
   uint64 createTime = 6;//创建时间
+  uint64 id = 7;//id
 }
 
 message MarketVerifyData{
@@ -175,7 +176,8 @@ message MarketingCondDto{
 }
 
 message MarketingRecordDto{
-  uint64 customerId = 1;//customerId
+  uint64 id = 1;//customerId
+  uint64 customerId = 2;//customerId
   bool verify = 3;//是否通过验证
   string source = 4;//客户来源
   uint64 couponIssuanceTime = 5;//优惠券发放时间
