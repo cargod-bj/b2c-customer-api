@@ -71,6 +71,8 @@ type CustomerService interface {
 	AddMarketVerifyData(ctx context.Context, in *MarketVerifyData, opts ...client.CallOption) (*common.Response, error)
 	//定时任务拉取营销客户数据
 	ScheduleMarketingUser(ctx context.Context, in *MarketingCondDto, opts ...client.CallOption) (*common.Response, error)
+	//更新客户营销记录表
+	UpdateMarketingRecord(ctx context.Context, in *MarketingRecordDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -225,6 +227,16 @@ func (c *customerService) ScheduleMarketingUser(ctx context.Context, in *Marketi
 	return out, nil
 }
 
+func (c *customerService) UpdateMarketingRecord(ctx context.Context, in *MarketingRecordDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.UpdateMarketingRecord", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Customer service
 
 type CustomerHandler interface {
@@ -256,6 +268,8 @@ type CustomerHandler interface {
 	AddMarketVerifyData(context.Context, *MarketVerifyData, *common.Response) error
 	//定时任务拉取营销客户数据
 	ScheduleMarketingUser(context.Context, *MarketingCondDto, *common.Response) error
+	//更新客户营销记录表
+	UpdateMarketingRecord(context.Context, *MarketingRecordDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -274,6 +288,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetC2BCustomerList(ctx context.Context, in *C2BCondDto, out *common.Response) error
 		AddMarketVerifyData(ctx context.Context, in *MarketVerifyData, out *common.Response) error
 		ScheduleMarketingUser(ctx context.Context, in *MarketingCondDto, out *common.Response) error
+		UpdateMarketingRecord(ctx context.Context, in *MarketingRecordDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -340,4 +355,8 @@ func (h *customerHandler) AddMarketVerifyData(ctx context.Context, in *MarketVer
 
 func (h *customerHandler) ScheduleMarketingUser(ctx context.Context, in *MarketingCondDto, out *common.Response) error {
 	return h.CustomerHandler.ScheduleMarketingUser(ctx, in, out)
+}
+
+func (h *customerHandler) UpdateMarketingRecord(ctx context.Context, in *MarketingRecordDto, out *common.Response) error {
+	return h.CustomerHandler.UpdateMarketingRecord(ctx, in, out)
 }

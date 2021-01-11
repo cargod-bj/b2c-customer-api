@@ -35,6 +35,8 @@ service Customer {
   rpc AddMarketVerifyData(MarketVerifyData) returns (common.Response) {}
   //定时任务拉取营销客户数据
   rpc ScheduleMarketingUser(MarketingCondDto) returns (common.Response) {}
+  //更新客户营销记录表
+  rpc UpdateMarketingRecord(MarketingRecordDto) returns (common.Response) {}
 }
 
 message CustomerDTO {
@@ -169,4 +171,12 @@ message MarketingCondDto{
   // 开始时间
   uint64 dateBegin = 7;
   // 结束时间
-  uint64 dateEnd = 8;}
+  uint64 dateEnd = 8;
+}
+
+message MarketingRecordDto{
+  string customerId = 1;//customerId
+  uint32 verify = 3;//是否通过验证
+  string source = 4;//客户来源
+  uint64 couponIssuanceTime = 5;//优惠券发放时间
+}
