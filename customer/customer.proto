@@ -166,5 +166,7 @@ message MarketingCondDto{
   string source = 1;
   // 是否验证 1已验证，9 未验证
   uint64 verify = 2;
-  uint64 createTime = 3;
-}
+  // 开始时间
+  uint64 dateBegin = 7;
+  // 结束时间
+  uint64 dateEnd = 8;}
