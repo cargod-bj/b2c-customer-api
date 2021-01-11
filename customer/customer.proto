@@ -53,6 +53,8 @@ message CustomerDTO {
   uint32 race = 17;
   repeated uint64 storeIds = 18;
   string data = 19;//营销附加参数
+  uint64 marketingPersonnel = 20;//营销人员ID
+  bool verify = 21;//是否验证
 
 }
 
