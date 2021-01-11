@@ -175,7 +175,7 @@ message MarketingCondDto{
 }
 
 message MarketingRecordDto{
-  string customerId = 1;//customerId
+  uint64 customerId = 1;//customerId
   uint32 verify = 3;//是否通过验证
   string source = 4;//客户来源
   uint64 couponIssuanceTime = 5;//优惠券发放时间
