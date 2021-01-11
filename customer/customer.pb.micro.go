@@ -65,10 +65,12 @@ type CustomerService interface {
 	GetCustomerByIds(ctx context.Context, in *IdList, opts ...client.CallOption) (*common.Response, error)
 	//回收邮件
 	GetMail(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
-	//拉取C2B拓客列表
+	//拉取C2B拓客列表(CMS前端展示用)
 	GetC2BCustomerList(ctx context.Context, in *C2BCondDto, opts ...client.CallOption) (*common.Response, error)
 	//存储营销客户相关验证数据
 	AddMarketVerifyData(ctx context.Context, in *MarketVerifyData, opts ...client.CallOption) (*common.Response, error)
+	//定时任务拉取营销客户数据
+	ScheduleMarketingUser(ctx context.Context, in *MarketingCondDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -213,6 +215,16 @@ func (c *customerService) AddMarketVerifyData(ctx context.Context, in *MarketVer
 	return out, nil
 }
 
+func (c *customerService) ScheduleMarketingUser(ctx context.Context, in *MarketingCondDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.ScheduleMarketingUser", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Customer service
 
 type CustomerHandler interface {
@@ -238,10 +250,12 @@ type CustomerHandler interface {
 	GetCustomerByIds(context.Context, *IdList, *common.Response) error
 	//回收邮件
 	GetMail(context.Context, *DeleteId, *common.Response) error
-	//拉取C2B拓客列表
+	//拉取C2B拓客列表(CMS前端展示用)
 	GetC2BCustomerList(context.Context, *C2BCondDto, *common.Response) error
 	//存储营销客户相关验证数据
 	AddMarketVerifyData(context.Context, *MarketVerifyData, *common.Response) error
+	//定时任务拉取营销客户数据
+	ScheduleMarketingUser(context.Context, *MarketingCondDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -259,6 +273,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetMail(ctx context.Context, in *DeleteId, out *common.Response) error
 		GetC2BCustomerList(ctx context.Context, in *C2BCondDto, out *common.Response) error
 		AddMarketVerifyData(ctx context.Context, in *MarketVerifyData, out *common.Response) error
+		ScheduleMarketingUser(ctx context.Context, in *MarketingCondDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -321,4 +336,8 @@ func (h *customerHandler) GetC2BCustomerList(ctx context.Context, in *C2BCondDto
 
 func (h *customerHandler) AddMarketVerifyData(ctx context.Context, in *MarketVerifyData, out *common.Response) error {
 	return h.CustomerHandler.AddMarketVerifyData(ctx, in, out)
+}
+
+func (h *customerHandler) ScheduleMarketingUser(ctx context.Context, in *MarketingCondDto, out *common.Response) error {
+	return h.CustomerHandler.ScheduleMarketingUser(ctx, in, out)
 }
