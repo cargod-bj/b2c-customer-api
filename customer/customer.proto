@@ -154,7 +154,8 @@ message C2BCustomerResult{
   string source = 4;//客户来源
   uint64 couponIssuanceTime = 5;//优惠券发放时间
   uint64 createTime = 6;//创建时间
-  uint64 id = 7;//id
+  uint64 id = 7;//ids
+  uint64 UserId = 8;//customer表用户ID
 }
 
 message MarketVerifyData{
