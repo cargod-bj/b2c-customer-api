@@ -67,6 +67,8 @@ type CustomerService interface {
 	GetMail(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*common.Response, error)
 	//通过门店和customerId获取人员的PIC
 	GetCustomerPIC(ctx context.Context, in *QueryPicDTO, opts ...client.CallOption) (*common.Response, error)
+	//website更新用户信息
+	UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -201,6 +203,16 @@ func (c *customerService) GetCustomerPIC(ctx context.Context, in *QueryPicDTO, o
 	return out, nil
 }
 
+func (c *customerService) UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.updateCustomerInfo", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Customer service
 
 type CustomerHandler interface {
@@ -228,6 +240,8 @@ type CustomerHandler interface {
 	GetMail(context.Context, *DeleteId, *common.Response) error
 	//通过门店和customerId获取人员的PIC
 	GetCustomerPIC(context.Context, *QueryPicDTO, *common.Response) error
+	//website更新用户信息
+	UpdateCustomerInfo(context.Context, *CustomerUpdateDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -244,6 +258,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetCustomerByIds(ctx context.Context, in *IdList, out *common.Response) error
 		GetMail(ctx context.Context, in *DeleteId, out *common.Response) error
 		GetCustomerPIC(ctx context.Context, in *QueryPicDTO, out *common.Response) error
+		UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -302,4 +317,8 @@ func (h *customerHandler) GetMail(ctx context.Context, in *DeleteId, out *common
 
 func (h *customerHandler) GetCustomerPIC(ctx context.Context, in *QueryPicDTO, out *common.Response) error {
 	return h.CustomerHandler.GetCustomerPIC(ctx, in, out)
+}
+
+func (h *customerHandler) UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, out *common.Response) error {
+	return h.CustomerHandler.UpdateCustomerInfo(ctx, in, out)
 }
