@@ -69,6 +69,8 @@ type CustomerService interface {
 	GetCustomerPIC(ctx context.Context, in *QueryPicDTO, opts ...client.CallOption) (*common.Response, error)
 	//website更新用户信息
 	UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, opts ...client.CallOption) (*common.Response, error)
+	//根据用户ID获取用户信息
+	GetCustomerById(ctx context.Context, in *GetCustomerByIdDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -213,6 +215,16 @@ func (c *customerService) UpdateCustomerInfo(ctx context.Context, in *CustomerUp
 	return out, nil
 }
 
+func (c *customerService) GetCustomerById(ctx context.Context, in *GetCustomerByIdDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.GetCustomerById", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Customer service
 
 type CustomerHandler interface {
@@ -242,6 +254,8 @@ type CustomerHandler interface {
 	GetCustomerPIC(context.Context, *QueryPicDTO, *common.Response) error
 	//website更新用户信息
 	UpdateCustomerInfo(context.Context, *CustomerUpdateDto, *common.Response) error
+	//根据用户ID获取用户信息
+	GetCustomerById(context.Context, *GetCustomerByIdDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -259,6 +273,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetMail(ctx context.Context, in *DeleteId, out *common.Response) error
 		GetCustomerPIC(ctx context.Context, in *QueryPicDTO, out *common.Response) error
 		UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, out *common.Response) error
+		GetCustomerById(ctx context.Context, in *GetCustomerByIdDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -321,4 +336,8 @@ func (h *customerHandler) GetCustomerPIC(ctx context.Context, in *QueryPicDTO, o
 
 func (h *customerHandler) UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, out *common.Response) error {
 	return h.CustomerHandler.UpdateCustomerInfo(ctx, in, out)
+}
+
+func (h *customerHandler) GetCustomerById(ctx context.Context, in *GetCustomerByIdDto, out *common.Response) error {
+	return h.CustomerHandler.GetCustomerById(ctx, in, out)
 }
