@@ -135,5 +135,5 @@ message CustomerUpdateDto {
   uint64 id = 1;
   string nickName = 2;
   string email = 4;
-  uint64 skipCollect = 3;
+  uint64 skipType = 3;
 }
