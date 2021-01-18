@@ -33,6 +33,8 @@ service Customer {
   rpc GetCustomerPIC(QueryPicDTO) returns (common.Response) {}
   //website更新用户信息
   rpc updateCustomerInfo(CustomerUpdateDto) returns (common.Response) {}
+  //根据用户ID获取用户信息
+  rpc GetCustomerById(GetCustomerByIdDto) returns (common.Response) {}
 }
 
 message QueryPicDTO{
@@ -136,4 +138,7 @@ message CustomerUpdateDto {
   string nickName = 2;
   string email = 4;
   uint64 skipType = 3;
+}
+message GetCustomerByIdDto {
+  uint64 id = 1;
 }
