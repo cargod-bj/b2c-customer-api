@@ -37,6 +37,13 @@ service Customer {
   rpc ScheduleMarketingUser(MarketingCondDto) returns (common.Response) {}
   //更新客户营销记录表
   rpc UpdateMarketingRecord(MarketingRecordDto) returns (common.Response) {}
+  //通过门店和customerId获取人员的PIC
+  rpc GetCustomerPIC(QueryPicDTO) returns (common.Response) {}
+}
+
+message QueryPicDTO{
+  uint64 storeId = 1;
+  uint64 customerId = 2;
 }
 
 message CustomerDTO {
