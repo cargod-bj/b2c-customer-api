@@ -206,7 +206,7 @@ func (c *customerService) GetCustomerPIC(ctx context.Context, in *QueryPicDTO, o
 }
 
 func (c *customerService) UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Customer.updateCustomerInfo", in)
+	req := c.c.NewRequest(c.name, "Customer.UpdateCustomerInfo", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {

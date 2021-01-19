@@ -32,7 +32,7 @@ service Customer {
   //通过门店和customerId获取人员的PIC
   rpc GetCustomerPIC(QueryPicDTO) returns (common.Response) {}
   //website更新用户信息
-  rpc updateCustomerInfo(CustomerUpdateDto) returns (common.Response) {}
+  rpc UpdateCustomerInfo(CustomerUpdateDto) returns (common.Response) {}
   //根据用户ID获取用户信息
   rpc GetCustomerById(GetCustomerByIdDto) returns (common.Response) {}
 }
