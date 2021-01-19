@@ -127,6 +127,8 @@ message CustomerResult {
   repeated uint64 staffIds = 16;
   uint32 race = 17;
   repeated StorePic storePic = 18;
+  string nickName = 19;
+
 }
 
 message StorePic{
