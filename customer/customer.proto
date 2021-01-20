@@ -29,6 +29,14 @@ service Customer {
   rpc GetCustomerByIds(IdList) returns (common.Response) {}
   //回收邮件
   rpc GetMail(DeleteId) returns (common.Response) {}
+  //拉取C2B拓客列表(CMS前端展示用)
+  rpc GetC2BCustomerList(C2BCondDto) returns (common.Response) {}
+  //存储营销客户相关验证数据
+  rpc AddMarketVerifyData(MarketVerifyData) returns (common.Response) {}
+  //定时任务拉取营销客户数据
+  rpc ScheduleMarketingUser(MarketingCondDto) returns (common.Response) {}
+  //更新客户营销记录表
+  rpc UpdateMarketingRecord(MarketingRecordDto) returns (common.Response) {}
   //通过门店和customerId获取人员的PIC
   rpc GetCustomerPIC(QueryPicDTO) returns (common.Response) {}
   //website更新用户信息
@@ -61,8 +69,10 @@ message CustomerDTO {
   repeated uint64 staffIds = 16;
   uint32 race = 17;
   repeated uint64 storeIds = 18;
-  string nickName = 19;
-  uint64 skipCollect = 20;
+  uint64 marketingPersonnel = 19;//营销人员ID
+  bool verify = 20;//是否验证
+  string nickName = 21;
+  uint64 skipCollect = 22;
 
 }
 
@@ -134,6 +144,59 @@ message CustomerResult {
 message StorePic{
   uint64 staffId = 1;
   uint64 storeId = 2;
+}
+message C2BCondDto{
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  string contactNo = 3;
+  // 客户来源
+  string source = 5;
+  // 是否验证 1已验证，9 未验证
+  uint64 verify = 6;
+  // 开始时间
+  uint64 dateBegin = 7;
+  // 结束时间
+  uint64 dateEnd = 8;
+  //
+  string customerId = 9;
+  // 拓客人员ID
+  uint64 marketingPersonnel = 10;
+}
+message C2BCustomerResult{
+  string customerId = 1;//customerId
+  string contactNo = 2;//手机号
+  uint32 verify = 3;//是否通过验证
+  string source = 4;//客户来源
+  uint64 couponIssuanceTime = 5;//优惠券发放时间
+  uint64 createTime = 6;//创建时间
+  uint64 id = 7;//ids
+  uint64 userId = 8;//customer表用户ID
+}
+
+message MarketVerifyData{
+  string contactNo = 2;//手机号
+  bool verify = 3;//是否通过验证
+  string source = 4;//客户来源
+  string data = 19;//营销附加参数
+}
+
+message MarketingCondDto{
+  // 客户来源
+  string source = 1;
+  // 是否验证 1已验证，9 未验证
+  uint64 verify = 2;
+  // 开始时间
+  uint64 dateBegin = 7;
+  // 结束时间
+  uint64 dateEnd = 8;
+}
+
+message MarketingRecordDto{
+  uint64 id = 1;//customerId
+  uint64 customerId = 2;//customerId
+  bool verify = 3;//是否通过验证
+  string source = 4;//客户来源
+  uint64 couponIssuanceTime = 5;//优惠券发放时间
 }
 message CustomerUpdateDto {
   uint64 id = 1;
