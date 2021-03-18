@@ -204,6 +204,7 @@ message CustomerUpdateDto {
   string nickName = 2;
   string email = 4;
   uint64 skipType = 3;
+  string googleId = 5; //Google ID
 }
 message GetCustomerByIdDto {
   uint64 id = 1;
