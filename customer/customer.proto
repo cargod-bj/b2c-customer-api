@@ -222,4 +222,6 @@ message GetMyCustomerCond {
   string email = 9;
   string createFromTime = 10;
   string createToTime = 11;
+  string assignFromTime = 12;
+  string assignToTime = 13;
 }
