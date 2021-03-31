@@ -43,6 +43,8 @@ service Customer {
   rpc UpdateCustomerInfo(CustomerUpdateDto) returns (common.Response) {}
   //根据用户ID获取用户信息
   rpc GetCustomerById(GetCustomerByIdDto) returns (common.Response) {}
+//  my customer
+  rpc GetMyCustomer(GetMyCustomerCond) returns (common.Response) {}
 }
 
 message QueryPicDTO{
@@ -206,4 +208,18 @@ message CustomerUpdateDto {
 }
 message GetCustomerByIdDto {
   uint64 id = 1;
+}
+
+message GetMyCustomerCond {
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  uint64 staffId = 3;
+  uint64 storeId = 4;
+  repeated uint64 userId = 5;
+  string customerId = 6;
+  string contactNo = 7;
+  string name = 8;
+  string email = 9;
+  string createFromTime = 10;
+  string createToTime = 11;
 }
