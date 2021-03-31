@@ -75,7 +75,7 @@ message CustomerDTO {
   bool verify = 20;//是否验证
   string nickName = 21;
   uint64 skipCollect = 22;
-
+  uint64 assignTime = 23;
 }
 
 message CustomerList {
