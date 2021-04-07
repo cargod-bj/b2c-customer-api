@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package marketing;
+package marketingChannel;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
-option go_package = "github.com/cargod-bj/b2c-customer-api/marketing";
+option go_package = "github.com/cargod-bj/b2c-customer-api/marketingChannel";
 /**
   * 客户
  */
-service Marketing {
+service MarketingChannel {
   //根据ID获取活动信息
   rpc GetMarketingById(GetMarketingByIdDto) returns (common.Response) {}
 }
