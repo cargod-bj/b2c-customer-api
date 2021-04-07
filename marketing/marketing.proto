@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package marketing;
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+option go_package = "github.com/cargod-bj/b2c-customer-api/marketing";
+/**
+  * 客户
+ */
+service Marketing {
+  //根据ID获取活动信息
+  rpc GetCustomerById(GetMarketingByIdDto) returns (common.Response) {}
+}
+message GetMarketingByIdDto {
+  uint64 id = 1;
+}
+
+message CustomerResult {
+  uint64  Id = 1;
+  string  Name = 2;
+  uint64  Status = 3;
+  uint64  IssuanceCoupon = 4;
+  uint64  CouponTemplateId = 5;
+  string  ImageWeb = 6;
+  string  ImageH5 = 7;
+  string  UtmSource = 8;
+  string  UtmMedium = 9;
+  string  UtmCampaign = 10;
+  string  UtmContent = 11;
+  string  UtmTerm = 12;
+  uint64  CreateTime = 13;
+  uint64  UpdateTime = 14;
+}
