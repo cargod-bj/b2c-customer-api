@@ -44,7 +44,7 @@ func NewMarketingEndpoints() []*api.Endpoint {
 
 type MarketingService interface {
 	//根据ID获取活动信息
-	GetCustomerById(ctx context.Context, in *GetMarketingByIdDto, opts ...client.CallOption) (*common.Response, error)
+	GetMarketingById(ctx context.Context, in *GetMarketingByIdDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type marketingService struct {
@@ -59,8 +59,8 @@ func NewMarketingService(name string, c client.Client) MarketingService {
 	}
 }
 
-func (c *marketingService) GetCustomerById(ctx context.Context, in *GetMarketingByIdDto, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Marketing.GetCustomerById", in)
+func (c *marketingService) GetMarketingById(ctx context.Context, in *GetMarketingByIdDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Marketing.GetMarketingById", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -73,12 +73,12 @@ func (c *marketingService) GetCustomerById(ctx context.Context, in *GetMarketing
 
 type MarketingHandler interface {
 	//根据ID获取活动信息
-	GetCustomerById(context.Context, *GetMarketingByIdDto, *common.Response) error
+	GetMarketingById(context.Context, *GetMarketingByIdDto, *common.Response) error
 }
 
 func RegisterMarketingHandler(s server.Server, hdlr MarketingHandler, opts ...server.HandlerOption) error {
 	type marketing interface {
-		GetCustomerById(ctx context.Context, in *GetMarketingByIdDto, out *common.Response) error
+		GetMarketingById(ctx context.Context, in *GetMarketingByIdDto, out *common.Response) error
 	}
 	type Marketing struct {
 		marketing
@@ -91,6 +91,6 @@ type marketingHandler struct {
 	MarketingHandler
 }
 
-func (h *marketingHandler) GetCustomerById(ctx context.Context, in *GetMarketingByIdDto, out *common.Response) error {
-	return h.MarketingHandler.GetCustomerById(ctx, in, out)
+func (h *marketingHandler) GetMarketingById(ctx context.Context, in *GetMarketingByIdDto, out *common.Response) error {
+	return h.MarketingHandler.GetMarketingById(ctx, in, out)
 }

@@ -8,13 +8,13 @@ option go_package = "github.com/cargod-bj/b2c-customer-api/marketing";
  */
 service Marketing {
   //根据ID获取活动信息
-  rpc GetCustomerById(GetMarketingByIdDto) returns (common.Response) {}
+  rpc GetMarketingById(GetMarketingByIdDto) returns (common.Response) {}
 }
 message GetMarketingByIdDto {
   uint64 id = 1;
 }
 
-message CustomerResult {
+message MarketingResult {
   uint64  Id = 1;
   string  Name = 2;
   uint64  Status = 3;
