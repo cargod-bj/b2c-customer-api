@@ -73,6 +73,7 @@ message CustomerDTO {
   bool verify = 20;//是否验证
   string nickName = 21;
   uint64 skipCollect = 22;
+  bool IssueCoupon = 23;//是否发放优惠券
 
 }
 
