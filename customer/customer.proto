@@ -57,6 +57,7 @@ message CustomerCondition{
   uint32 pageSize = 2;
   uint64 startId = 3;
   uint64 beginTime = 4;
+  uint64 endTime = 5;
 }
 
 message CustomerDTO {
