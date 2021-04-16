@@ -45,11 +45,21 @@ service Customer {
   rpc GetCustomerById(GetCustomerByIdDto) returns (common.Response) {}
 //  my customer
   rpc GetMyCustomer(GetMyCustomerCond) returns (common.Response) {}
+
+  rpc ListCustomerByConditon(CustomerCondition) returns (common.Response) {}
 }
 
 message QueryPicDTO{
   uint64 storeId = 1;
   uint64 customerId = 2;
+}
+
+message CustomerCondition{
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  uint64 startId = 3;
+  uint64 beginTime = 4;
+  uint64 endTime = 5;
 }
 
 message CustomerDTO {
@@ -71,11 +81,14 @@ message CustomerDTO {
   repeated uint64 staffIds = 16;
   uint32 race = 17;
   repeated uint64 storeIds = 18;
-  uint64 marketingPersonnel = 19;//营销人员ID
+  uint64 marketingSource = 19;//营销来源
   bool verify = 20;//是否验证
   string nickName = 21;
   uint64 skipCollect = 22;
-  uint64 assignTime = 23;
+  bool IssueCoupon = 23;//是否发放优惠券
+  string googleId = 24; //Google ID
+
+  uint64 assignTime = 25;
 }
 
 message CustomerList {
@@ -205,6 +218,7 @@ message CustomerUpdateDto {
   string nickName = 2;
   string email = 4;
   uint64 skipType = 3;
+  string googleId = 5; //Google ID
 }
 message GetCustomerByIdDto {
   uint64 id = 1;

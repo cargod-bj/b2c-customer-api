@@ -79,8 +79,7 @@ type CustomerService interface {
 	UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, opts ...client.CallOption) (*common.Response, error)
 	//根据用户ID获取用户信息
 	GetCustomerById(ctx context.Context, in *GetCustomerByIdDto, opts ...client.CallOption) (*common.Response, error)
-	//  my customer
-	GetMyCustomer(ctx context.Context, in *GetMyCustomerCond, opts ...client.CallOption) (*common.Response, error)
+	ListCustomerByConditon(ctx context.Context, in *CustomerCondition, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -275,8 +274,8 @@ func (c *customerService) GetCustomerById(ctx context.Context, in *GetCustomerBy
 	return out, nil
 }
 
-func (c *customerService) GetMyCustomer(ctx context.Context, in *GetMyCustomerCond, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Customer.GetMyCustomer", in)
+func (c *customerService) ListCustomerByConditon(ctx context.Context, in *CustomerCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.ListCustomerByConditon", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -324,8 +323,7 @@ type CustomerHandler interface {
 	UpdateCustomerInfo(context.Context, *CustomerUpdateDto, *common.Response) error
 	//根据用户ID获取用户信息
 	GetCustomerById(context.Context, *GetCustomerByIdDto, *common.Response) error
-	//  my customer
-	GetMyCustomer(context.Context, *GetMyCustomerCond, *common.Response) error
+	ListCustomerByConditon(context.Context, *CustomerCondition, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -348,7 +346,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetCustomerPIC(ctx context.Context, in *QueryPicDTO, out *common.Response) error
 		UpdateCustomerInfo(ctx context.Context, in *CustomerUpdateDto, out *common.Response) error
 		GetCustomerById(ctx context.Context, in *GetCustomerByIdDto, out *common.Response) error
-		GetMyCustomer(ctx context.Context, in *GetMyCustomerCond, out *common.Response) error
+		ListCustomerByConditon(ctx context.Context, in *CustomerCondition, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -433,6 +431,6 @@ func (h *customerHandler) GetCustomerById(ctx context.Context, in *GetCustomerBy
 	return h.CustomerHandler.GetCustomerById(ctx, in, out)
 }
 
-func (h *customerHandler) GetMyCustomer(ctx context.Context, in *GetMyCustomerCond, out *common.Response) error {
-	return h.CustomerHandler.GetMyCustomer(ctx, in, out)
+func (h *customerHandler) ListCustomerByConditon(ctx context.Context, in *CustomerCondition, out *common.Response) error {
+	return h.CustomerHandler.ListCustomerByConditon(ctx, in, out)
 }
