@@ -118,6 +118,7 @@ message AssignDto{
   uint64 StoreId = 3;
   uint64 Type = 4;
   uint64 Operator = 5;
+  uint64 AssignTime = 6;
 }
 
 message CustCondDto{
