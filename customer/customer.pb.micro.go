@@ -54,7 +54,7 @@ type CustomerService interface {
 	//根据分页信息+查询条件查询客户信息
 	GetList(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error)
 	//根据入参条件模糊搜索用户信息 不分页
-	GetCustomerByCond(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
+	GetCustomerByCond(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error)
 	//根据 userid批量获取用户信息
 	GetCustomerList(ctx context.Context, in *IdListDto, opts ...client.CallOption) (*common.Response, error)
 	//批量分配用户到PIC
@@ -146,7 +146,7 @@ func (c *customerService) GetList(ctx context.Context, in *CustCondDto, opts ...
 	return out, nil
 }
 
-func (c *customerService) GetCustomerByCond(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error) {
+func (c *customerService) GetCustomerByCond(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Customer.GetCustomerByCond", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -310,7 +310,7 @@ type CustomerHandler interface {
 	//根据分页信息+查询条件查询客户信息
 	GetList(context.Context, *CustCondDto, *common.Response) error
 	//根据入参条件模糊搜索用户信息 不分页
-	GetCustomerByCond(context.Context, *CustomerDTO, *common.Response) error
+	GetCustomerByCond(context.Context, *CustCondDto, *common.Response) error
 	//根据 userid批量获取用户信息
 	GetCustomerList(context.Context, *IdListDto, *common.Response) error
 	//批量分配用户到PIC
@@ -347,7 +347,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		Update(ctx context.Context, in *CustomerDTO, out *common.Response) error
 		GetCustomer(ctx context.Context, in *CustomerDTO, out *common.Response) error
 		GetList(ctx context.Context, in *CustCondDto, out *common.Response) error
-		GetCustomerByCond(ctx context.Context, in *CustomerDTO, out *common.Response) error
+		GetCustomerByCond(ctx context.Context, in *CustCondDto, out *common.Response) error
 		GetCustomerList(ctx context.Context, in *IdListDto, out *common.Response) error
 		AssignCustomer(ctx context.Context, in *AssignDto, out *common.Response) error
 		GetCustomerByContactNo(ctx context.Context, in *CustCondDto, out *common.Response) error
@@ -394,7 +394,7 @@ func (h *customerHandler) GetList(ctx context.Context, in *CustCondDto, out *com
 	return h.CustomerHandler.GetList(ctx, in, out)
 }
 
-func (h *customerHandler) GetCustomerByCond(ctx context.Context, in *CustomerDTO, out *common.Response) error {
+func (h *customerHandler) GetCustomerByCond(ctx context.Context, in *CustCondDto, out *common.Response) error {
 	return h.CustomerHandler.GetCustomerByCond(ctx, in, out)
 }
 
