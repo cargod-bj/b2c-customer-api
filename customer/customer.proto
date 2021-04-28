@@ -133,6 +133,7 @@ message CustCondDto{
   repeated uint64 staffIds = 8;
   uint64 storeId = 15;
   repeated uint64 storeIds = 16;
+  uint64 id = 9;
 }
 
 message CustomerResult {
