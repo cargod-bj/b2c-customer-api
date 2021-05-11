@@ -18,7 +18,7 @@ service Customer {
   //根据分页信息+查询条件查询客户信息
   rpc GetList(CustCondDto) returns (common.Response) {}
   //根据入参条件模糊搜索用户信息 不分页
-  rpc GetCustomerByCond(CustCondDto) returns (common.Response) {}
+  rpc GetCustomerByCond(CustomerDTO) returns (common.Response) {}
   //根据 userid批量获取用户信息
   rpc GetCustomerList(IdListDto) returns (common.Response) {}
   //批量分配用户到PIC
