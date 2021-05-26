@@ -47,6 +47,8 @@ service Customer {
   rpc GetMyCustomer(GetMyCustomerCond) returns (common.Response) {}
 
   rpc ListCustomerByConditon(CustomerCondition) returns (common.Response) {}
+  // 模糊搜索客户信息
+  rpc GetCustomerByNoFuzzyPagination(CustCondDto) returns (common.Response) {}
 }
 
 message QueryPicDTO{

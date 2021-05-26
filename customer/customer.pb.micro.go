@@ -82,6 +82,8 @@ type CustomerService interface {
 	//  my customer
 	GetMyCustomer(ctx context.Context, in *GetMyCustomerCond, opts ...client.CallOption) (*common.Response, error)
 	ListCustomerByConditon(ctx context.Context, in *CustomerCondition, opts ...client.CallOption) (*common.Response, error)
+	// 模糊搜索客户信息
+	GetCustomerByNoFuzzyPagination(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -296,6 +298,16 @@ func (c *customerService) ListCustomerByConditon(ctx context.Context, in *Custom
 	return out, nil
 }
 
+func (c *customerService) GetCustomerByNoFuzzyPagination(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.GetCustomerByNoFuzzyPagination", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Customer service
 
 type CustomerHandler interface {
@@ -338,6 +350,8 @@ type CustomerHandler interface {
 	//  my customer
 	GetMyCustomer(context.Context, *GetMyCustomerCond, *common.Response) error
 	ListCustomerByConditon(context.Context, *CustomerCondition, *common.Response) error
+	// 模糊搜索客户信息
+	GetCustomerByNoFuzzyPagination(context.Context, *CustCondDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -362,6 +376,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetCustomerById(ctx context.Context, in *GetCustomerByIdDto, out *common.Response) error
 		GetMyCustomer(ctx context.Context, in *GetMyCustomerCond, out *common.Response) error
 		ListCustomerByConditon(ctx context.Context, in *CustomerCondition, out *common.Response) error
+		GetCustomerByNoFuzzyPagination(ctx context.Context, in *CustCondDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -452,4 +467,8 @@ func (h *customerHandler) GetMyCustomer(ctx context.Context, in *GetMyCustomerCo
 
 func (h *customerHandler) ListCustomerByConditon(ctx context.Context, in *CustomerCondition, out *common.Response) error {
 	return h.CustomerHandler.ListCustomerByConditon(ctx, in, out)
+}
+
+func (h *customerHandler) GetCustomerByNoFuzzyPagination(ctx context.Context, in *CustCondDto, out *common.Response) error {
+	return h.CustomerHandler.GetCustomerByNoFuzzyPagination(ctx, in, out)
 }
