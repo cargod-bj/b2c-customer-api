@@ -86,6 +86,8 @@ type CustomerService interface {
 	GetCustomerByNoFuzzyPagination(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error)
 	//获取客户根据EMAIL
 	GetCustomerByEmail(ctx context.Context, in *CustomerDTO, opts ...client.CallOption) (*common.Response, error)
+	// 保存用户信息
+	SaveUserInfo(ctx context.Context, in *ContactsCondDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type customerService struct {
@@ -320,6 +322,16 @@ func (c *customerService) GetCustomerByEmail(ctx context.Context, in *CustomerDT
 	return out, nil
 }
 
+func (c *customerService) SaveUserInfo(ctx context.Context, in *ContactsCondDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.SaveUserInfo", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Customer service
 
 type CustomerHandler interface {
@@ -366,6 +378,8 @@ type CustomerHandler interface {
 	GetCustomerByNoFuzzyPagination(context.Context, *CustCondDto, *common.Response) error
 	//获取客户根据EMAIL
 	GetCustomerByEmail(context.Context, *CustomerDTO, *common.Response) error
+	// 保存用户信息
+	SaveUserInfo(context.Context, *ContactsCondDto, *common.Response) error
 }
 
 func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...server.HandlerOption) error {
@@ -392,6 +406,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		ListCustomerByConditon(ctx context.Context, in *CustomerCondition, out *common.Response) error
 		GetCustomerByNoFuzzyPagination(ctx context.Context, in *CustCondDto, out *common.Response) error
 		GetCustomerByEmail(ctx context.Context, in *CustomerDTO, out *common.Response) error
+		SaveUserInfo(ctx context.Context, in *ContactsCondDto, out *common.Response) error
 	}
 	type Customer struct {
 		customer
@@ -490,4 +505,8 @@ func (h *customerHandler) GetCustomerByNoFuzzyPagination(ctx context.Context, in
 
 func (h *customerHandler) GetCustomerByEmail(ctx context.Context, in *CustomerDTO, out *common.Response) error {
 	return h.CustomerHandler.GetCustomerByEmail(ctx, in, out)
+}
+
+func (h *customerHandler) SaveUserInfo(ctx context.Context, in *ContactsCondDto, out *common.Response) error {
+	return h.CustomerHandler.SaveUserInfo(ctx, in, out)
 }
