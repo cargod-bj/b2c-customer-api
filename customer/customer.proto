@@ -96,6 +96,8 @@ message CustomerDTO {
 
   uint64 assignTime = 25;
   uint64 registerMethod = 26;//注册方式
+  uint32 registeredType = 27;
+  string registrationInvitedBy = 28;
 }
 
 message CustomerList {
