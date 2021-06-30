@@ -94,6 +94,9 @@ message CustomerDTO {
 
   uint64 assignTime = 25;
   uint64 registerMethod = 26;//注册方式
+  string fullAddress = 27;
+  string icNumber = 28;
+  string fullName = 29;
 }
 
 message CustomerList {
