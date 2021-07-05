@@ -84,6 +84,8 @@ type CustomerService interface {
 	ListCustomerByConditon(ctx context.Context, in *CustomerCondition, opts ...client.CallOption) (*common.Response, error)
 	// 模糊搜索客户信息
 	GetCustomerByNoFuzzyPagination(ctx context.Context, in *CustCondDto, opts ...client.CallOption) (*common.Response, error)
+	//获取客户根据EMAIL
+	GetCustomerByEmail(ctx context.Context, in *ContactsCondDto, opts ...client.CallOption) (*common.Response, error)
 	// 保存用户信息
 	SaveUserInfo(ctx context.Context, in *ContactsCondDto, opts ...client.CallOption) (*common.Response, error)
 }
@@ -310,6 +312,16 @@ func (c *customerService) GetCustomerByNoFuzzyPagination(ctx context.Context, in
 	return out, nil
 }
 
+func (c *customerService) GetCustomerByEmail(ctx context.Context, in *ContactsCondDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Customer.GetCustomerByEmail", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *customerService) SaveUserInfo(ctx context.Context, in *ContactsCondDto, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Customer.SaveUserInfo", in)
 	out := new(common.Response)
@@ -364,6 +376,8 @@ type CustomerHandler interface {
 	ListCustomerByConditon(context.Context, *CustomerCondition, *common.Response) error
 	// 模糊搜索客户信息
 	GetCustomerByNoFuzzyPagination(context.Context, *CustCondDto, *common.Response) error
+	//获取客户根据EMAIL
+	GetCustomerByEmail(context.Context, *ContactsCondDto, *common.Response) error
 	// 保存用户信息
 	SaveUserInfo(context.Context, *ContactsCondDto, *common.Response) error
 }
@@ -391,6 +405,7 @@ func RegisterCustomerHandler(s server.Server, hdlr CustomerHandler, opts ...serv
 		GetMyCustomer(ctx context.Context, in *GetMyCustomerCond, out *common.Response) error
 		ListCustomerByConditon(ctx context.Context, in *CustomerCondition, out *common.Response) error
 		GetCustomerByNoFuzzyPagination(ctx context.Context, in *CustCondDto, out *common.Response) error
+		GetCustomerByEmail(ctx context.Context, in *ContactsCondDto, out *common.Response) error
 		SaveUserInfo(ctx context.Context, in *ContactsCondDto, out *common.Response) error
 	}
 	type Customer struct {
@@ -486,6 +501,10 @@ func (h *customerHandler) ListCustomerByConditon(ctx context.Context, in *Custom
 
 func (h *customerHandler) GetCustomerByNoFuzzyPagination(ctx context.Context, in *CustCondDto, out *common.Response) error {
 	return h.CustomerHandler.GetCustomerByNoFuzzyPagination(ctx, in, out)
+}
+
+func (h *customerHandler) GetCustomerByEmail(ctx context.Context, in *ContactsCondDto, out *common.Response) error {
+	return h.CustomerHandler.GetCustomerByEmail(ctx, in, out)
 }
 
 func (h *customerHandler) SaveUserInfo(ctx context.Context, in *ContactsCondDto, out *common.Response) error {
