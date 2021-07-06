@@ -49,6 +49,10 @@ service Customer {
   rpc ListCustomerByConditon(CustomerCondition) returns (common.Response) {}
   // 模糊搜索客户信息
   rpc GetCustomerByNoFuzzyPagination(CustCondDto) returns (common.Response) {}
+  //获取客户根据EMAIL
+  rpc GetCustomerByEmail(ContactsCondDto) returns (common.Response) {}
+  // 保存用户信息
+  rpc SaveUserInfo(ContactsCondDto) returns (common.Response) {}
 }
 
 message QueryPicDTO{
@@ -92,6 +96,8 @@ message CustomerDTO {
 
   uint64 assignTime = 25;
   uint64 registerMethod = 26;//注册方式
+  uint32 registeredType = 27;
+  string registrationInvitedBy = 28;
 }
 
 message CustomerList {
@@ -243,4 +249,10 @@ message GetMyCustomerCond {
   uint64 createToTime = 11;
   uint64 assignFromTime = 12;
   uint64 assignToTime = 13;
+}
+
+message ContactsCondDto{
+  string phoneNum = 1;
+  string userName = 2;
+  string email = 3;
 }
