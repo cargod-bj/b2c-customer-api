@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package notifyMe;
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+option go_package = "github.com/cargod-bj/b2c-customer-api/notifyMe";
+/**
+  * 收藏
+ */
+service NotifyMe {
+  //新增 notifyMe
+  rpc Add(NotifyMeDTO) returns (common.Response) {}
+}
+
+message NotifyMeDTO {
+  string email = 1;
+  repeated uint64 color = 2;
+  string keywords = 3;
+  string millageForm = 4;
+  string millageTo = 5;
+  repeated uint64 modelIds = 6;
+  string priceFrom = 7;
+  string priceTo = 8;
+  repeated uint64 storeIds = 9;
+  repeated uint64 transmission = 10;
+  string yearFrom = 11;
+  string yearTo = 12;
+}
+
