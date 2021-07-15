@@ -24,6 +24,6 @@ message NotifyMeDTO {
   string transmission = 10;
   string yearFrom = 11;
   string yearTo = 12;
-  string bodyTypeIds = 13;
+  string bodyTypeId = 13;
 }
 
